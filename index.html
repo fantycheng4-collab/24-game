@@ -195,12 +195,28 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.9);
       max-height: 90vh;
       overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close-icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .modal-close-icon:hover {
+      color: var(--gold-accent);
     }
 
     .modal-header {
       border-bottom: 1px solid #4a3b33;
       padding-bottom: 15px;
       margin-bottom: 20px;
+      padding-right: 30px;
     }
 
     .modal-dept-title {
@@ -247,23 +263,70 @@
       border-color: var(--gold-accent);
     }
 
-    .close-btn {
+    /* 答題結果區域 */
+    .result-box {
+      display: none;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .result-box.correct {
       display: block;
+      background-color: rgba(46, 125, 50, 0.2);
+      border: 1px solid var(--success-green);
+    }
+
+    .result-box.wrong {
+      display: block;
+      background-color: rgba(139, 0, 0, 0.2);
+      border: 1px solid #d32f2f;
+    }
+
+    .result-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .result-explanation {
+      text-align: left;
+      font-size: 0.95rem;
+      color: #e0d0c0;
+      margin-bottom: 15px;
+      background: rgba(0,0,0,0.2);
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .action-btn {
       width: 100%;
       padding: 12px;
-      background-color: #5a483e;
-      color: white;
       border: none;
       border-radius: 6px;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 10px;
       transition: background-color 0.2s;
     }
 
-    .close-btn:hover {
-      background-color: #725d51;
+    .next-btn {
+      background-color: var(--gold-accent);
+      color: #1f1917;
+    }
+
+    .next-btn:hover {
+      background-color: #f1c40f;
+    }
+
+    .retry-btn {
+      background-color: #8b0000;
+      color: white;
+    }
+
+    .retry-btn:hover {
+      background-color: #a00000;
     }
 
     footer {
@@ -305,6 +368,7 @@
   <!-- 關卡 Modal -->
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
+      <div class="modal-close-icon" onclick="closeModal()" title="返回選單">✕</div>
       <div class="modal-header">
         <h2 class="modal-dept-title" id="modal-dept-name">司官名稱</h2>
       </div>
@@ -317,7 +381,13 @@
       <div class="options-grid" id="modal-options">
         <!-- 選項按鈕 -->
       </div>
-      <button class="close-btn" onclick="closeModal()">放棄離場（返回選單）</button>
+
+      <!-- 結果回應區 -->
+      <div class="result-box" id="result-box">
+        <div class="result-title" id="result-title"></div>
+        <div class="result-explanation" id="result-explanation"></div>
+        <button class="action-btn" id="action-btn"></button>
+      </div>
     </div>
   </div>
 
@@ -815,6 +885,10 @@
       currentDeptIndex = index;
       const dept = departmentsData[index];
 
+      // 重置結果提示區
+      const resultBox = document.getElementById("result-box");
+      resultBox.className = "result-box";
+
       document.getElementById("modal-dept-name").innerText = `${dept.name}（${dept.desc}）`;
       document.getElementById("modal-dialogue").innerText = dept.dialogue;
       document.getElementById("modal-question").innerText = `【考題】${dept.question}`;
@@ -825,6 +899,7 @@
       dept.options.forEach((opt, optIdx) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
+        btn.id = `opt-btn-${optIdx}`;
         btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
         btn.onclick = () => checkAnswer(optIdx);
         optionsContainer.appendChild(btn);
@@ -835,6 +910,13 @@
 
     function checkAnswer(selectedIndex) {
       const dept = departmentsData[currentDeptIndex];
+      const resultBox = document.getElementById("result-box");
+      const resultTitle = document.getElementById("result-title");
+      const resultExplanation = document.getElementById("result-explanation");
+      const actionBtn = document.getElementById("action-btn");
+
+      // 禁用選項按鈕
+      const optBtns = document.querySelectorAll(".option-btn");
 
       if (selectedIndex === dept.answer) {
         playCorrectSound();
@@ -847,28 +929,65 @@
           updateStats();
         }
 
-        // 跳出對話框告知玩家答對了
-        alert(`🎉 恭喜你答對了！\n\n【解說】\n${dept.explanation}`);
-        
-        // 自動關閉對話框返回主畫面
-        closeModal();
+        optBtns.forEach(btn => btn.disabled = true);
+
+        // 顯示答對區塊
+        resultBox.className = "result-box correct";
+        resultTitle.innerHTML = "🎉 恭喜答對！";
+        resultTitle.style.color = "#4caf50";
+        resultExplanation.innerHTML = `<b>【典故解說】</b><br>${dept.explanation}`;
+
+        if (clearedDepts.size === departmentsData.length) {
+          actionBtn.className = "action-btn next-btn";
+          actionBtn.innerText = "🏆 圓滿通關！領取功德錦囊 ➔";
+          actionBtn.onclick = () => {
+            closeModal();
+            triggerGoldShower();
+            setTimeout(() => {
+              alert(`🎉 恭喜你順利通過臺灣府城隍廟二十四司的所有考驗！\n總共獲得功德值：${score} 分！\n城隍爺賜予你「府城平安功德錦囊」，保佑你平安順遂！\n\n（製作：臺灣府城隍廟志工小V）`);
+            }, 300);
+          };
+        } else {
+          actionBtn.className = "action-btn next-btn";
+          actionBtn.innerText = "繼續挑戰下一關 ➔";
+          actionBtn.onclick = goToNextStage;
+        }
 
       } else {
         playWrongSound();
-        // 跳出對話框告知玩家答錯了
-        alert(`❌ 答錯囉！請仔細閱讀司官教誨後再試一次！`);
+        
+        // 顯示答錯區塊
+        resultBox.className = "result-box wrong";
+        resultTitle.innerHTML = "❌ 答錯囉！請再試一次！";
+        resultTitle.style.color = "#f44336";
+        resultExplanation.innerText = "請仔細閱讀上方司官的教誨與考題意旨，選出正確的答案！";
+
+        actionBtn.className = "action-btn retry-btn";
+        actionBtn.innerText = "🔄 請再試一次";
+        actionBtn.onclick = () => {
+          resultBox.className = "result-box";
+        };
       }
+    }
+
+    function goToNextStage() {
+      // 尋找下一個未過關的關卡，或者直接前進下一關
+      let nextIndex = (currentDeptIndex + 1) % departmentsData.length;
+      
+      // 優先尋找尚未解開的關卡
+      for (let i = 0; i < departmentsData.length; i++) {
+        let checkIdx = (currentDeptIndex + 1 + i) % departmentsData.length;
+        if (!clearedDepts.has(checkIdx)) {
+          nextIndex = checkIdx;
+          break;
+        }
+      }
+
+      openModal(nextIndex);
     }
 
     function closeModal() {
       document.getElementById("modal").classList.remove("active");
-      
-      if (clearedDepts.size === departmentsData.length) {
-        setTimeout(() => {
-          triggerGoldShower();
-          alert(`🎉 恭喜你順利通過臺灣府城隍廟二十四司的所有考驗！\n總共獲得功德值：${score} 分！\n城隍爺賜予你「府城平安功德錦囊」，保佑你平安順遂！\n\n（製作：臺灣府城隍廟志工小V）`);
-        }, 300);
-      }
     }
 
     window.onload = initGame;
