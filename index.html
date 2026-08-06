@@ -21,139 +21,149 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
     }
 
     body {
+      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-light);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      line-height: 1.6;
+      padding-bottom: 50px;
     }
 
     header {
-      text-align: center;
-      margin-bottom: 20px;
+      background: linear-gradient(180deg, #3a0d0d 0%, var(--bg-dark) 100%);
       border-bottom: 2px solid var(--gold-accent);
-      padding-bottom: 15px;
-      width: 100%;
-      max-width: 900px;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
     }
 
-    h1 {
-      color: var(--gold-accent);
+    header h1 {
       font-size: 2.2rem;
-      letter-spacing: 2px;
+      color: var(--gold-accent);
       margin-bottom: 8px;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     }
 
-    .subtitle {
+    header p {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 1.05rem;
+      max-width: 800px;
+      margin: 0 auto 15px auto;
     }
 
-    .author-badge {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.9rem;
+    .audio-control-bar {
+      margin-top: 10px;
+    }
+
+    .bgm-btn {
+      background-color: #4a2d21;
       color: var(--gold-accent);
-      background: rgba(212, 175, 55, 0.1);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 3px 12px;
-      border-radius: 15px;
-    }
-
-    /* 音樂控制按鈕 */
-    .audio-control {
-      margin-top: 12px;
-      background: #3d312b;
       border: 1px solid var(--gold-accent);
-      color: var(--gold-accent);
       padding: 6px 16px;
       border-radius: 20px;
       cursor: pointer;
-      font-weight: bold;
+      font-size: 0.9rem;
       transition: all 0.2s;
     }
 
-    .audio-control:hover {
-      background: var(--gold-accent);
+    .bgm-btn:hover {
+      background-color: var(--gold-accent);
       color: var(--bg-dark);
     }
 
     .stats-bar {
       display: flex;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 900px;
-      background-color: var(--card-bg);
-      padding: 12px 20px;
+      justify-content: center;
+      gap: 30px;
+      background-color: rgba(0,0,0,0.3);
+      padding: 12px;
       border-radius: 8px;
-      border: 1px solid var(--gold-accent);
-      margin-bottom: 20px;
+      max-width: 400px;
+      margin: 20px auto 0 auto;
+      border: 1px solid #44342d;
+    }
+
+    .stat-item {
+      font-size: 1.1rem;
       font-weight: bold;
     }
 
-    .stats-item span {
+    .stat-item span {
       color: var(--gold-accent);
+      font-size: 1.3rem;
     }
 
-    .grid-container {
+    .main-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .grid-title {
+      font-size: 1.5rem;
+      color: var(--gold-accent);
+      border-left: 4px solid var(--gold-accent);
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    .dept-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 12px;
-      width: 100%;
-      max-width: 900px;
-      margin-bottom: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
     }
 
     .dept-card {
       background-color: var(--card-bg);
-      border: 2px solid #4a3b32;
+      border: 1px solid #4a3b33;
       border-radius: 8px;
-      padding: 15px 10px;
+      padding: 20px 15px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
       position: relative;
+      overflow: hidden;
     }
 
     .dept-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       border-color: var(--gold-accent);
-      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 6px 12px rgba(212, 175, 55, 0.2);
     }
 
     .dept-card.cleared {
       border-color: var(--success-green);
-      background-color: #1b331e;
+      background: linear-gradient(135deg, var(--card-bg) 0%, #1e3a20 100%);
     }
 
     .dept-card.cleared::after {
-      content: "✓";
+      content: "✓ 成功過關";
       position: absolute;
-      top: 5px;
+      top: 8px;
       right: 8px;
-      color: #81c784;
-      font-weight: bold;
+      background-color: var(--success-green);
+      color: white;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
     .dept-number {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
     }
 
     .dept-name {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: bold;
-      color: var(--gold-accent);
+      color: var(--text-light);
     }
 
-    /* Modal Styles */
+    /* 彈出視窗 Modal */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -164,11 +174,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-      z-index: 100;
-      padding: 15px;
     }
 
     .modal-overlay.active {
@@ -177,95 +186,97 @@
     }
 
     .modal-card {
-      background-color: var(--card-bg);
+      background-color: #2b221d;
       border: 2px solid var(--gold-accent);
       border-radius: 12px;
-      width: 100%;
-      max-width: 600px;
-      padding: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      position: relative;
+      width: 90%;
+      max-width: 650px;
+      padding: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.9);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .modal-title {
-      font-size: 1.6rem;
+    .modal-header {
+      border-bottom: 1px solid #4a3b33;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .modal-dept-title {
       color: var(--gold-accent);
-      border-bottom: 1px solid #4a3b32;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
+      font-size: 1.6rem;
     }
 
     .dialogue-box {
       background-color: rgba(0,0,0,0.3);
-      border-left: 4px solid var(--gold-accent);
+      border-left: 3px solid var(--primary-red);
       padding: 12px 15px;
       margin-bottom: 20px;
       font-style: italic;
       color: #e0d0c0;
-      line-height: 1.5;
     }
 
     .question-box {
+      margin-bottom: 20px;
       font-size: 1.1rem;
-      margin-bottom: 15px;
-      line-height: 1.6;
     }
 
     .options-grid {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 20px;
     }
 
     .option-btn {
-      background-color: #3d312b;
-      border: 1px solid #5c4a40;
+      background-color: #3d302a;
       color: var(--text-light);
-      padding: 12px 15px;
+      border: 1px solid #5a483e;
+      padding: 12px 16px;
       border-radius: 6px;
       text-align: left;
-      cursor: pointer;
       font-size: 1rem;
-      transition: background-color 0.2s;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
     .option-btn:hover {
-      background-color: #52423a;
+      background-color: #524138;
       border-color: var(--gold-accent);
     }
 
     .feedback-box {
-      display: none;
-      padding: 12px;
+      padding: 12px 15px;
       border-radius: 6px;
-      margin-bottom: 15px;
-      line-height: 1.5;
+      margin-bottom: 20px;
+      display: none;
     }
 
     .feedback-box.correct {
-      display: block;
-      background-color: rgba(46, 125, 50, 0.3);
+      background-color: rgba(46, 125, 50, 0.25);
       border: 1px solid var(--success-green);
       color: #a5d6a7;
     }
 
     .feedback-box.wrong {
-      display: block;
-      background-color: rgba(183, 28, 28, 0.3);
-      border: 1px solid #e53935;
+      background-color: rgba(139, 0, 0, 0.25);
+      border: 1px solid var(--primary-red);
       color: #ef9a9a;
     }
 
     .close-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
       background-color: var(--primary-red);
       color: white;
       border: none;
-      padding: 10px 20px;
       border-radius: 6px;
-      cursor: pointer;
+      font-size: 1rem;
       font-weight: bold;
-      float: right;
+      cursor: pointer;
+      transition: background-color 0.2s;
     }
 
     .close-btn:hover {
@@ -273,63 +284,63 @@
     }
 
     footer {
-      margin-top: auto;
-      padding: 20px 0 10px 0;
-      color: var(--text-muted);
-      font-size: 0.9rem;
       text-align: center;
-      border-top: 1px solid #3d312b;
-      width: 100%;
-      max-width: 900px;
-    }
-
-    @media (max-width: 600px) {
-      .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      h1 {
-        font-size: 1.6rem;
-      }
+      margin-top: 40px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>臺灣府城隍廟：《二十四司闖關尋寶》</h1>
-    <div class="subtitle">解開二十四司威嚴考題，查閱陰陽功過，尋得城隍賜予之功德錦囊</div>
-    <div class="author-badge">製作：臺灣府城隍廟志工小V</div>
-    <br>
-    <button class="audio-control" id="bgm-btn" onclick="toggleBGM()">🎵 播放背景音樂</button>
-  </header>
-
-  <!-- 古風背景音樂 -->
+  <!-- 背景音樂播放器 (使用靜音範例音樂，可自行替換) -->
   <audio id="bgm" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=traditional-chinese-music-guzheng-113264.mp3" type="audio/mpeg">
+    <source src="https://actions.google.com/sounds/v1/ambiences/temple_bell.ogg" type="audio/ogg">
   </audio>
 
-  <div class="stats-bar">
-    <div class="stats-item">已破關卡：<span id="cleared-count">0</span> / 24</div>
-    <div class="stats-item">獲得功德值：<span id="score">0</span></div>
+  <header>
+    <h1>臺灣府城隍廟：《二十四司闖關尋寶》</h1>
+    <p>歡迎來到國定古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！</p>
+    
+    <div class="audio-control-bar">
+      <button class="bgm-btn" id="bgm-btn" onclick="toggleBGM()">🎵 播放背景音樂</button>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat-item">已解開關卡：<span id="cleared-count">0</span> / 24</div>
+      <div class="stat-item">功德值：<span id="score">0</span></div>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="grid-title">廟宇二十四司典藏關卡</div>
+    <div class="dept-grid" id="dept-grid">
+      <!-- 由 JavaScript 動態生成卡片 -->
+    </div>
   </div>
 
-  <div class="grid-container" id="dept-grid"></div>
-
-  <!-- Modal -->
+  <!-- 關卡 Modal -->
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
-      <div class="modal-title" id="modal-dept-name">神尊關卡</div>
-      <div class="dialogue-box" id="modal-dialogue"></div>
-      <div class="question-box" id="modal-question"></div>
-      <div class="options-grid" id="modal-options"></div>
+      <div class="modal-header">
+        <h2 class="modal-dept-title" id="modal-dept-name">司官名稱</h2>
+      </div>
+      <div class="dialogue-box" id="modal-dialogue">
+        司官語錄加載中...
+      </div>
+      <div class="question-box" id="modal-question">
+        題目加載中...
+      </div>
+      <div class="options-grid" id="modal-options">
+        <!-- 選項按鈕 -->
+      </div>
       <div class="feedback-box" id="modal-feedback"></div>
-      <button class="close-btn" id="modal-close" style="display:none;" onclick="closeModal()">離開關卡</button>
-      <div style="clear:both;"></div>
+      <button class="close-btn" id="modal-close" onclick="closeModal()">離開關卡</button>
     </div>
   </div>
 
   <footer>
-    <p>臺灣府城隍廟 敬製 ｜ 製作：臺灣府城隍廟志工小V</p>
+    <p>臺灣府城隍廟數位導覽專案 | 志工小V 敬製</p>
   </footer>
 
   <script>
@@ -703,7 +714,7 @@
     let currentDeptIndex = null;
     let audioCtx = null;
 
-    // Web Audio API：動態生成答對/答錯音效
+    // Web Audio API 音效
     function getAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -711,7 +722,6 @@
       return audioCtx;
     }
 
-    // 答對音效
     function playCorrectSound() {
       try {
         const ctx = getAudioContext();
@@ -734,7 +744,6 @@
       } catch (e) { console.log(e); }
     }
 
-    // 答錯音效
     function playWrongSound() {
       try {
         const ctx = getAudioContext();
@@ -757,7 +766,6 @@
       } catch (e) { console.log(e); }
     }
 
-    // 切換音樂播放狀態
     function toggleBGM() {
       const bgm = document.getElementById("bgm");
       const btn = document.getElementById("bgm-btn");
@@ -770,7 +778,6 @@
       }
     }
 
-    // 通關金粉慶祝特效
     function triggerGoldShower() {
       var duration = 4 * 1000;
       var end = Date.now() + duration;
@@ -797,7 +804,6 @@
       })();
     }
 
-    // 初始化網頁與卡片
     function initGame() {
       const grid = document.getElementById("dept-grid");
       grid.innerHTML = "";
@@ -818,13 +824,11 @@
       updateStats();
     }
 
-    // 更新統計資訊
     function updateStats() {
       document.getElementById("cleared-count").innerText = clearedDepts.size;
       document.getElementById("score").innerText = score;
     }
 
-    // 打開關卡 Modal
     function openModal(index) {
       currentDeptIndex = index;
       const dept = departmentsData[index];
@@ -839,6 +843,7 @@
       dept.options.forEach((opt, optIdx) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
+        btn.id = `opt-btn-${optIdx}`;
         btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
         btn.onclick = () => checkAnswer(optIdx);
         optionsContainer.appendChild(btn);
@@ -848,39 +853,50 @@
       feedback.className = "feedback-box";
       feedback.style.display = "none";
 
-      document.getElementById("modal-close").style.display = "none";
+      const closeBtn = document.getElementById("modal-close");
+      closeBtn.style.display = "block";
+      closeBtn.innerText = "離開關卡";
+
       document.getElementById("modal").classList.add("active");
     }
 
-    // 檢查答案
     function checkAnswer(selectedIndex) {
       const dept = departmentsData[currentDeptIndex];
       const feedback = document.getElementById("modal-feedback");
-      const optionBtns = document.querySelectorAll(".option-btn");
-
-      optionBtns.forEach(btn => btn.style.pointerEvents = "none");
 
       if (selectedIndex === dept.answer) {
+        // 答對處理
         playCorrectSound();
         feedback.className = "feedback-box correct";
-        feedback.innerHTML = `<strong>答對了！</strong><br>${dept.explanation}`;
-        
+        feedback.innerHTML = `<strong>🎉 答對了！</strong><br>${dept.explanation}`;
+        feedback.style.display = "block";
+
+        // 鎖定所有選項
+        document.querySelectorAll(".option-btn").forEach(btn => btn.style.pointerEvents = "none");
+
         if (!clearedDepts.has(currentDeptIndex)) {
           clearedDepts.add(currentDeptIndex);
           score += 100;
           document.getElementById(`card-${currentDeptIndex}`).classList.add("cleared");
           updateStats();
         }
+
+        document.getElementById("modal-close").innerText = "恭喜過關！離開關卡";
       } else {
+        // 答錯處理
         playWrongSound();
         feedback.className = "feedback-box wrong";
-        feedback.innerHTML = `<strong>遺憾答錯了！</strong><br>再試一次或者仔細思考司官的教誨喔！`;
-      }
+        feedback.innerHTML = `<strong>❌ 答錯囉！再試試看！</strong><br>請仔細閱讀考題與司官教誨，重新選擇答案。`;
+        feedback.style.display = "block";
 
-      document.getElementById("modal-close").style.display = "block";
+        const wrongBtn = document.getElementById(`opt-btn-${selectedIndex}`);
+        if(wrongBtn) {
+          wrongBtn.style.opacity = "0.5";
+          wrongBtn.style.pointerEvents = "none";
+        }
+      }
     }
 
-    // 關閉 Modal
     function closeModal() {
       document.getElementById("modal").classList.remove("active");
       
