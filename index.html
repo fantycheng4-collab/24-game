@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>臺灣府城隍廟：《二十四司闖關尋寶》</title>
+  
+  <!-- 社群分享預覽標籤 (解決 LINE/FB 預覽文字問題) -->
+  <meta name="description" content="歡迎來到國定古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="臺灣府城隍廟：《二十四司闖關尋寶》">
+  <meta property="og:description" content="歡迎來到國定古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！">
+
   <!-- 載入金粉/彩帶特效庫 Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -783,7 +790,7 @@
     let currentDeptIndex = null;
     let audioCtx = null;
 
-    // Web Audio API 音效 (即時合成音效，免載入外部音檔)
+    // Web Audio API 音效
     function getAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
