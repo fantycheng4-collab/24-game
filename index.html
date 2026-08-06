@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>臺灣府城隍廟：《二十四司闖關尋寶》</title>
   
-  <!-- 社群分享預覽標籤 (解決 LINE/FB 預覽文字問題) -->
+  <!-- 社群分享預覽標籤 -->
   <meta name="description" content="歡迎來到國定古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！">
   <meta property="og:type" content="website">
   <meta property="og:title" content="臺灣府城隍廟：《二十四司闖關尋寶》">
-  <meta property="og:description" content="歡迎來到國定古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！">
+  <meta property="og:description" content="歡迎來到國德古蹟臺灣府城隍廟！城隍爺麾下設有二十四司分掌陰陽秩序，請一一造訪各司，解開考題積累功德值！">
 
   <!-- 載入金粉/彩帶特效庫 Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -250,7 +250,7 @@
       border-color: var(--gold-accent);
     }
 
-    /* 答題結果獨立中央彈窗 Overlay (階層更高 z-index 1100) */
+    /* 答題結果獨立中央彈窗 Overlay */
     .result-overlay {
       position: fixed;
       top: 0;
@@ -288,7 +288,6 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    /* 答對樣式：金色宮廟風 */
     .result-card.correct {
       border: 2px solid var(--gold-accent);
       background: linear-gradient(180deg, #2a221a 0%, #1a251b 100%);
@@ -299,7 +298,6 @@
       text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
     }
 
-    /* 答錯樣式：朱紅警示風 */
     .result-card.wrong {
       border: 2px solid var(--vermilion-red);
       background: linear-gradient(180deg, #2d1a1a 0%, #1f1414 100%);
@@ -360,7 +358,7 @@
       background-color: #d32f2f;
     }
 
-    /* 終極通關專用 Modal (無網址標頭、漂亮卡片) */
+    /* 終極通關卡片 */
     .final-card {
       border: 2px solid var(--gold-accent) !important;
       background: linear-gradient(180deg, #3a2a1d 0%, #1a120c 100%) !important;
@@ -429,7 +427,7 @@
     </div>
   </div>
 
-  <!-- 終極通關純粹網頁彈窗 (替代原生 alert) -->
+  <!-- 終極通關彈窗 -->
   <div class="result-overlay" id="final-overlay">
     <div class="result-card final-card">
       <div class="result-title" style="color: var(--gold-accent); font-size: 1.8rem;">🎉 圓滿通關！</div>
@@ -444,7 +442,7 @@
 
   <script>
     // 24司完整對話與題目資料庫
-    const departmentsData = [
+    const rawDepartmentsData = [
       {
         id: "陰陽司",
         name: "陰陽司",
@@ -736,289 +734,10 @@
         desc: "掌管文風教化、學子功名與文運",
         dialogue: "「十年寒窗無人問，一舉成名天下知。學政司保佑苦讀學子文章寫作與考運亨通，但前提是品德端正！」",
         question: "古時臺灣府為全臺文化發祥地，學政司與城隍廟中的文昌帝君信仰相呼應，主要庇佑何事？",
-        options: [
-          "航海捕魚順利",
-          "學業進步、考試功名與品德教化",
-          "身體鍛鍊健美",
-          "房屋興建穩固"
-        ],
-        answer: 1,
-        explanation: "學政司掌管教育學政與科舉考試，提倡尊師重道與文風教化。"
-      },
-      {
-        id: "註壽司",
-        name: "註壽司",
-        desc: "掌管記錄世人壽元長短與添壽添齡",
-        dialogue: "「生死有命，富貴在天。然積德行善者，吾註壽司會在生死簿上為其添壽增齡！」",
-        question: "民間傳說中，「註壽司」掌管生死簿上的壽元，何種行為常被認為能獲神明添壽？",
-        options: [
-          "戒殺護生、多做善事、孝順長輩",
-          "經常與他人爭吵",
-          "浪費資源食物",
-          "通宵達旦沉迷娛樂"
-        ],
-        answer: 0,
-        explanation: "民間信仰認為戒殺放生、行善積德可獲得註壽司賜福添壽。"
-      },
-      {
-        id: "典籍司",
-        name: "典籍司",
-        desc: "掌管保管神聖經書典籍與歷史紀錄",
-        dialogue: "「經書乃智慧之源，典籍乃歷史之鏡。典籍司守護陰陽兩界經冊文獻，綿延文化智慧。」",
-        question: "典籍司的責任是保管書籍典籍，這在現代社會相當於何種機構的職能？",
-        options: [
-          "體育館",
-          "國家圖書館／檔案館",
-          "警察局",
-          "急診室"
-        ],
-        answer: 1,
-        explanation: "典籍司典藏經書與古籍，如同圖書館與檔案館保存文化知識。"
-      },
-      {
-        id: "罰惡司",
-        name: "罰惡司",
-        desc: "掌管審理惡行與執行懲罰",
-        dialogue: "「善惡到頭終有報，只爭來早與來遲！凡作奸犯科、傷害他人者，罰惡司絕不姑息！」",
-        question: "罰惡司的神像造型多呈現怒目圓睜、威嚴凶猛，其主要目的為何？",
-        options: [
-          "嚇唬小朋友作樂",
-          "震懾作惡宵小，展現國法陰律之威嚴，使人不敢造惡",
-          "因為神像製作時塗錯顏色",
-          "為了吸引遊客拍照"
-        ],
-        answer: 1,
-        explanation: "罰惡司青面獠牙或威嚴怒目，旨在警惕世人「作惡必懲」，達到震懾邪惡的效果。"
-      },
-      {
-        id: "檢簿司",
-        name: "檢簿司",
-        desc: "掌管查對功過簿冊、核實無誤",
-        dialogue: "「對帳查簿，嚴謹至極。功過簿上每一筆記載，吾檢簿司皆反覆查核，確保絲毫不差！」",
-        question: "檢簿司在二十四司中扮演著「複查與審計」的角色，這說明了陰司審判的何種特質？",
-        options: [
-          "草率隨便",
-          "嚴謹客觀、查證確實、絕不冤枉好人亦不縱容壞人",
-          "可以靠關係塞錢關說",
-          "憑運氣決定結果"
-        ],
-        answer: 1,
-        explanation: "檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
-      }
-    ];
+        options:這就是傳說中的**「選擇題心理學」**！很多出題者在設計題目時，常會潛意識覺得放在第一個選項（A）太過直接、放在最後一個（D）又怕太偏，結果不自覺就把正確答案塞在中間的 **B 或 C**。
 
-    // 遊戲狀態變數
-    let clearedDepts = new Set();
-    let score = 0;
-    let currentDeptIndex = null;
-    let audioCtx = null;
+不過也有另一種可能叫**「巴德-邁因霍夫現象」（頻率錯覺）**——當你第一次注意到「答案好像都是第二個」之後，你的大腦就會特別去捕捉那些答案真的是第二個的時刻，自動忽略了其他選項。
 
-    // Web Audio API 音效
-    function getAudioContext() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      return audioCtx;
-    }
+雖然利用這種心理規律偶爾能拯救猜題命中率，但要是遇到刻意反套路的出題者，可能就會直接踩雷了。
 
-    function playCorrectSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3);
-
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.4);
-      } catch (e) { console.log(e); }
-    }
-
-    function playWrongSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.exponentialRampToValueAtTime(80, now + 0.2);
-
-        gain.gain.setValueAtTime(0.4, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(now);
-        osc.stop(now + 0.2);
-      } catch (e) { console.log(e); }
-    }
-
-    function triggerGoldShower() {
-      var duration = 4 * 1000;
-      var end = Date.now() + duration;
-
-      (function frame() {
-        confetti({
-          particleCount: 7,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ['#d4af37', '#ffd700', '#8b0000', '#ffffff']
-        });
-        confetti({
-          particleCount: 7,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ['#d4af37', '#ffd700', '#8b0000', '#ffffff']
-        });
-
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
-      })();
-    }
-
-    function initGame() {
-      const grid = document.getElementById("dept-grid");
-      grid.innerHTML = "";
-
-      departmentsData.forEach((dept, index) => {
-        const card = document.createElement("div");
-        card.className = "dept-card";
-        card.id = `card-${index}`;
-        card.onclick = () => openModal(index);
-
-        card.innerHTML = `
-          <div class="dept-number">第 ${index + 1} 司</div>
-          <div class="dept-name">${dept.name}</div>
-        `;
-        grid.appendChild(card);
-      });
-
-      updateStats();
-    }
-
-    function updateStats() {
-      document.getElementById("cleared-count").innerText = clearedDepts.size;
-      document.getElementById("score").innerText = score;
-    }
-
-    function openModal(index) {
-      currentDeptIndex = index;
-      const dept = departmentsData[index];
-
-      document.getElementById("modal-dept-name").innerText = `${dept.name}（${dept.desc}）`;
-      document.getElementById("modal-dialogue").innerText = dept.dialogue;
-      document.getElementById("modal-question").innerText = `【考題】${dept.question}`;
-      
-      const optionsContainer = document.getElementById("modal-options");
-      optionsContainer.innerHTML = "";
-
-      dept.options.forEach((opt, optIdx) => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
-        btn.onclick = () => checkAnswer(optIdx);
-        optionsContainer.appendChild(btn);
-      });
-
-      document.getElementById("modal").classList.add("active");
-    }
-
-    function checkAnswer(selectedIndex) {
-      const dept = departmentsData[currentDeptIndex];
-      const resultOverlay = document.getElementById("result-overlay");
-      const resultCard = document.getElementById("result-card");
-      const resultTitle = document.getElementById("result-title");
-      const resultExplanation = document.getElementById("result-explanation");
-      const actionBtn = document.getElementById("result-action-btn");
-
-      if (selectedIndex === dept.answer) {
-        playCorrectSound();
-        
-        // 增加分數與標記過關
-        if (!clearedDepts.has(currentDeptIndex)) {
-          clearedDepts.add(currentDeptIndex);
-          score += 100;
-          document.getElementById(`card-${currentDeptIndex}`).classList.add("cleared");
-          updateStats();
-        }
-
-        resultCard.className = "result-card correct";
-        resultTitle.innerText = "🎉 恭喜答對！";
-        resultExplanation.innerHTML = `<b>【典故解析】</b><br>${dept.explanation}`;
-
-        if (clearedDepts.size === departmentsData.length) {
-          actionBtn.className = "action-btn next-btn";
-          actionBtn.innerText = "🏆 圓滿通關！領取功德錦囊 ➔";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            closeModal();
-            triggerGoldShower();
-            document.getElementById("final-overlay").classList.add("active");
-          };
-        } else {
-          actionBtn.className = "action-btn next-btn";
-          actionBtn.innerText = "繼續挑戰下一關 ➔";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            goToNextStage();
-          };
-        }
-
-      } else {
-        playWrongSound();
-        
-        resultCard.className = "result-card wrong";
-        resultTitle.innerText = "❌ 答錯囉！請再試一次！";
-        resultExplanation.innerText = "仔細閱讀司官指示與考題涵義，重新思考看看喔！";
-
-        actionBtn.className = "action-btn retry-btn";
-        actionBtn.innerText = "🔄 再試一次";
-        actionBtn.onclick = closeResultOverlay;
-      }
-
-      resultOverlay.classList.add("active");
-    }
-
-    function closeResultOverlay() {
-      document.getElementById("result-overlay").classList.remove("active");
-    }
-
-    function closeFinalOverlay() {
-      document.getElementById("final-overlay").classList.remove("active");
-    }
-
-    function goToNextStage() {
-      let nextIndex = (currentDeptIndex + 1) % departmentsData.length;
-      for (let i = 0; i < departmentsData.length; i++) {
-        let checkIdx = (currentDeptIndex + 1 + i) % departmentsData.length;
-        if (!clearedDepts.has(checkIdx)) {
-          nextIndex = checkIdx;
-          break;
-        }
-      }
-      openModal(nextIndex);
-    }
-
-    function closeModal() {
-      document.getElementById("modal").classList.remove("active");
-    }
-
-    window.onload = initGame;
-  </script>
-</body>
-</html>
+你現在是在刷哪一種考試的題庫，還是遇到什麼特定類型的題目？
