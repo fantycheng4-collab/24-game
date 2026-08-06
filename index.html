@@ -250,14 +250,14 @@
       border-color: var(--gold-accent);
     }
 
-    /* 獨立答題結果彈窗 Overlay (階層更高 z-index 1100) */
+    /* 答題結果獨立中央彈窗 Overlay (階層更高 z-index 1100) */
     .result-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0, 0, 0, 0.75);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -360,6 +360,20 @@
       background-color: #d32f2f;
     }
 
+    /* 終極通關專用 Modal (無網址標頭、漂亮卡片) */
+    .final-card {
+      border: 2px solid var(--gold-accent) !important;
+      background: linear-gradient(180deg, #3a2a1d 0%, #1a120c 100%) !important;
+    }
+
+    .final-body {
+      font-size: 1.1rem;
+      color: #f5e6d3;
+      line-height: 1.8;
+      margin: 20px 0;
+      text-align: center;
+    }
+
     footer {
       text-align: center;
       margin-top: 40px;
@@ -415,9 +429,18 @@
     </div>
   </div>
 
-  <footer>
-    <p>臺灣府城隍廟志工小V 敬製</p>
-  </footer>
+  <!-- 終極通關純粹網頁彈窗 (替代原生 alert) -->
+  <div class="result-overlay" id="final-overlay">
+    <div class="result-card final-card">
+      <div class="result-title" style="color: var(--gold-accent); font-size: 1.8rem;">🎉 圓滿通關！</div>
+      <div class="final-body">
+        恭喜你順利通過臺灣府城隍廟二十四司的所有考驗！<br>
+        總共獲得功德值：<b style="color: var(--gold-accent); font-size: 1.3rem;">2400 分</b>！<br><br>
+        城隍爺賜予你<b>「府城平安功德錦囊」</b>，<br>保佑你平安順遂！
+      </div>
+      <button class="action-btn next-btn" onclick="closeFinalOverlay()">確定</button>
+    </div>
+  </div>
 
   <script>
     // 24司完整對話與題目資料庫
@@ -945,9 +968,7 @@
             closeResultOverlay();
             closeModal();
             triggerGoldShower();
-            setTimeout(() => {
-              alert(`🎉 恭喜你順利通過臺灣府城隍廟二十四司的所有考驗！\n總共獲得功德值：${score} 分！\n城隍爺賜予你「府城平安功德錦囊」，保佑你平安順遂！\n\n（臺灣府城隍廟志工小V 敬製）`);
-            }, 300);
+            document.getElementById("final-overlay").classList.add("active");
           };
         } else {
           actionBtn.className = "action-btn next-btn";
@@ -975,6 +996,10 @@
 
     function closeResultOverlay() {
       document.getElementById("result-overlay").classList.remove("active");
+    }
+
+    function closeFinalOverlay() {
+      document.getElementById("final-overlay").classList.remove("active");
     }
 
     function goToNextStage() {
