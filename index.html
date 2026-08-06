@@ -220,6 +220,7 @@
     .question-box {
       margin-bottom: 20px;
       font-size: 1.1rem;
+      font-weight: bold;
     }
 
     .options-grid {
@@ -246,41 +247,23 @@
       border-color: var(--gold-accent);
     }
 
-    .feedback-box {
-      padding: 12px 15px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .feedback-box.correct {
-      background-color: rgba(46, 125, 50, 0.25);
-      border: 1px solid var(--success-green);
-      color: #a5d6a7;
-    }
-
-    .feedback-box.wrong {
-      background-color: rgba(139, 0, 0, 0.25);
-      border: 1px solid var(--primary-red);
-      color: #ef9a9a;
-    }
-
     .close-btn {
       display: block;
       width: 100%;
       padding: 12px;
-      background-color: var(--primary-red);
+      background-color: #5a483e;
       color: white;
       border: none;
       border-radius: 6px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 10px;
       transition: background-color 0.2s;
     }
 
     .close-btn:hover {
-      background-color: #a00000;
+      background-color: #725d51;
     }
 
     footer {
@@ -293,7 +276,7 @@
 </head>
 <body>
 
-  <!-- 背景音樂播放器 (使用靜音範例音樂，可自行替換) -->
+  <!-- 背景音樂播放器 -->
   <audio id="bgm" loop preload="auto">
     <source src="https://actions.google.com/sounds/v1/ambiences/temple_bell.ogg" type="audio/ogg">
   </audio>
@@ -334,8 +317,7 @@
       <div class="options-grid" id="modal-options">
         <!-- 選項按鈕 -->
       </div>
-      <div class="feedback-box" id="modal-feedback"></div>
-      <button class="close-btn" id="modal-close" onclick="closeModal()">離開關卡</button>
+      <button class="close-btn" onclick="closeModal()">放棄離場（返回選單）</button>
     </div>
   </div>
 
@@ -359,7 +341,7 @@
           "雙眼閉合，象徵心如止水"
         ],
         answer: 1,
-        explanation: "正確！陰陽司官神像面孔常呈現半黑半白（或半黑半金），代表其橫跨陰陽兩界、公正不阿、審理黑白善惡之意。"
+        explanation: "陰陽司官神像面孔常呈現半黑半白（或半黑半金），代表其橫跨陰陽兩界、公正不阿、審理黑白善惡之意。"
       },
       {
         id: "速報司",
@@ -374,7 +356,7 @@
           "負責掌管廟宇慶典儀軌"
         ],
         answer: 1,
-        explanation: "正確！速報司講求「速辦速報」，負責將陽間急迫的善惡事項或冤情迅速呈報城隍爺。"
+        explanation: "速報司講求「速辦速報」，負責將陽間急迫的善惡事項或冤情迅速呈報城隍爺。"
       },
       {
         id: "考功司",
@@ -389,7 +371,7 @@
           "考驗武藝技能"
         ],
         answer: 1,
-        explanation: "正確！考功司源自古代吏部的考功清吏司，專門負責考察官員（及凡人）的績效表現與評估功過。"
+        explanation: "考功司源自古代吏部的考功清吏司，專門負責考察官員（及凡人）的績效表現與評估功過。"
       },
       {
         id: "感應司",
@@ -404,7 +386,7 @@
           "只有白天祈禱才會獲得回應"
         ],
         answer: 0,
-        explanation: "正確！感應司負責察知起心動念，強調心念一動即有感應，起善念即獲善應。"
+        explanation: "感應司負責察知起心動念，強調心念一動即有感應，起善念即獲善應。"
       },
       {
         id: "保安司",
@@ -419,7 +401,7 @@
           "祈求延年益壽"
         ],
         answer: 1,
-        explanation: "正確！保安司意即「保衛平安」，負責維護境內安寧與地方秩序。"
+        explanation: "保安司意即「保衛平安」，負責維護境內安寧與地方秩序。"
       },
       {
         id: "提刑司",
@@ -434,7 +416,7 @@
           "負責教育科舉考試"
         ],
         answer: 1,
-        explanation: "正確！提刑司專司刑獄審理與司法懲戒，確保正義得以伸張。"
+        explanation: "提刑司專司刑獄審理與司法懲戒，確保正義得以伸張。"
       },
       {
         id: "巡政司",
@@ -449,7 +431,7 @@
           "農田水源的分配"
         ],
         answer: 0,
-        explanation: "正確！巡政司代表城隍爺巡察陽間政事，監督官吏是否盡責清廉。"
+        explanation: "巡政司代表城隍爺巡察陽間政事，監督官吏是否盡責清廉。"
       },
       {
         id: "督糧司",
@@ -464,7 +446,7 @@
           "海邊漁業捕撈"
         ],
         answer: 1,
-        explanation: "正確！督糧司掌管民間民生基石——糧食與農穀，並懲戒浪費糧食者。"
+        explanation: "督糧司掌管民間民生基石——糧食與農穀，並懲戒浪費糧食者。"
       },
       {
         id: "註福司",
@@ -479,7 +461,7 @@
           "找尋地理風水寶地"
         ],
         answer: 1,
-        explanation: "正確！「註福司」根據人的善行修為登記福報，強調「禍福無門，唯人自召」。"
+        explanation: "「註福司」根據人的善行修為登記福報，強調「禍福無門，唯人自召」。"
       },
       {
         id: "儀禮司",
@@ -494,7 +476,7 @@
           "爭先恐後插隊插香"
         ],
         answer: 1,
-        explanation: "正確！儀禮司規範禮節，參拜神明時端莊誠懇、遵守禮儀方能表達敬意。"
+        explanation: "儀禮司規範禮節，參拜神明時端莊誠懇、遵守禮儀方能表達敬意。"
       },
       {
         id: "賞善司",
@@ -509,7 +491,7 @@
           "寶劍與盾牌"
         ],
         answer: 1,
-        explanation: "正確！賞善司掌管「賞善簿」，詳細記載世人所做大小善事並給予相應善報。"
+        explanation: "賞善司掌管「賞善簿」，詳細記載世人所做大小善事並給予相應善報。"
       },
       {
         id: "稽查司",
@@ -524,7 +506,7 @@
           "編寫宗教歌謠"
         ],
         answer: 1,
-        explanation: "正確！稽查司如同神界調查局，負責稽查世間隱秘不為人知的善惡真相。"
+        explanation: "稽查司如同神界調查局，負責稽查世間隱秘不為人知的善惡真相。"
       },
       {
         id: "地獄司",
@@ -539,7 +521,7 @@
           "代表城隍爺邀請大家來拜拜"
         ],
         answer: 1,
-        explanation: "正確！臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到城隍面前接受陰司審判。"
+        explanation: "臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到城隍面前接受陰司審判。"
       },
       {
         id: "驅疫司",
@@ -554,7 +536,7 @@
           "向河裡拋擲穀物"
         ],
         answer: 0,
-        explanation: "正確！當發生疫病時，常透過建醮或城隍出巡遶境，請驅疫司清掃地方不正之氣。"
+        explanation: "當發生疫病時，常透過建醮或城隍出巡遶境，請驅疫司清掃地方不正之氣。"
       },
       {
         id: "掌案司",
@@ -569,7 +551,7 @@
           "環保局"
         ],
         answer: 1,
-        explanation: "正確！掌案司負責管理陰陽兩界交辦的各項案件卷宗與檔案。"
+        explanation: "掌案司負責管理陰陽兩界交辦的各項案件卷宗與檔案。"
       },
       {
         id: "察過司",
@@ -584,7 +566,7 @@
           "只要大事不做惡，小事隨便沒關係"
         ],
         answer: 1,
-        explanation: "正確！察過司提醒人們「吾日三省吾身」，注意細節與小過失，及時惕勵改過。"
+        explanation: "察過司提醒人們「吾日三省吾身」，注意細節與小過失，及時惕勵改過。"
       },
       {
         id: "良愿司",
@@ -599,7 +581,7 @@
           "祈求不用努力就能獲得成功"
         ],
         answer: 2,
-        explanation: "正確！良愿司專門登記並協助實現「良善誓願」，強調發心必須純正利他。"
+        explanation: "良愿司專門登記並協助實現「良善誓願」，強調發心必須純正利他。"
       },
       {
         id: "功曹司",
@@ -614,7 +596,7 @@
           "預測明日天氣變化"
         ],
         answer: 1,
-        explanation: "正確！功曹司為紀錄與傳遞公文之官，負責將陽間祭禱與功德精確記載並呈報。"
+        explanation: "功曹司為紀錄與傳遞公文之官，負責將陽間祭禱與功德精確記載並呈報。"
       },
       {
         id: "文書司",
@@ -629,7 +611,7 @@
           "水利司"
         ],
         answer: 0,
-        explanation: "正確！文書司專司正式公文與疏文牒冊的審核與轉呈。"
+        explanation: "文書司專司正式公文與疏文牒冊的審核與轉呈。"
       },
       {
         id: "學政司",
@@ -644,7 +626,7 @@
           "房屋興建穩固"
         ],
         answer: 1,
-        explanation: "正確！學政司掌管教育學政與科舉考試，提倡尊師重道與文風教化。"
+        explanation: "學政司掌管教育學政與科舉考試，提倡尊師重道與文風教化。"
       },
       {
         id: "註壽司",
@@ -659,7 +641,7 @@
           "通宵達旦沉迷娛樂"
         ],
         answer: 0,
-        explanation: "正確！民間信仰認為戒殺放生、行善積德可獲得註壽司賜福添壽。"
+        explanation: "民間信仰認為戒殺放生、行善積德可獲得註壽司賜福添壽。"
       },
       {
         id: "典籍司",
@@ -674,7 +656,7 @@
           "急診室"
         ],
         answer: 1,
-        explanation: "正確！典籍司典藏經書與古籍，如同圖書館與檔案館保存文化知識。"
+        explanation: "典籍司典藏經書與古籍，如同圖書館與檔案館保存文化知識。"
       },
       {
         id: "罰惡司",
@@ -689,7 +671,7 @@
           "為了吸引遊客拍照"
         ],
         answer: 1,
-        explanation: "正確！罰惡司青面獠牙或威嚴怒目，旨在警惕世人「作惡必懲」，達到震懾邪惡的效果。"
+        explanation: "罰惡司青面獠牙或威嚴怒目，旨在警惕世人「作惡必懲」，達到震懾邪惡的效果。"
       },
       {
         id: "檢簿司",
@@ -704,7 +686,7 @@
           "憑運氣決定結果"
         ],
         answer: 1,
-        explanation: "正確！檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
+        explanation: "檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
       }
     ];
 
@@ -843,37 +825,21 @@
       dept.options.forEach((opt, optIdx) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
-        btn.id = `opt-btn-${optIdx}`;
         btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
         btn.onclick = () => checkAnswer(optIdx);
         optionsContainer.appendChild(btn);
       });
-
-      const feedback = document.getElementById("modal-feedback");
-      feedback.className = "feedback-box";
-      feedback.style.display = "none";
-
-      const closeBtn = document.getElementById("modal-close");
-      closeBtn.style.display = "block";
-      closeBtn.innerText = "離開關卡";
 
       document.getElementById("modal").classList.add("active");
     }
 
     function checkAnswer(selectedIndex) {
       const dept = departmentsData[currentDeptIndex];
-      const feedback = document.getElementById("modal-feedback");
 
       if (selectedIndex === dept.answer) {
-        // 答對處理
         playCorrectSound();
-        feedback.className = "feedback-box correct";
-        feedback.innerHTML = `<strong>🎉 答對了！</strong><br>${dept.explanation}`;
-        feedback.style.display = "block";
-
-        // 鎖定所有選項
-        document.querySelectorAll(".option-btn").forEach(btn => btn.style.pointerEvents = "none");
-
+        
+        // 增加分數與標記過關
         if (!clearedDepts.has(currentDeptIndex)) {
           clearedDepts.add(currentDeptIndex);
           score += 100;
@@ -881,19 +847,16 @@
           updateStats();
         }
 
-        document.getElementById("modal-close").innerText = "恭喜過關！離開關卡";
-      } else {
-        // 答錯處理
-        playWrongSound();
-        feedback.className = "feedback-box wrong";
-        feedback.innerHTML = `<strong>❌ 答錯囉！再試試看！</strong><br>請仔細閱讀考題與司官教誨，重新選擇答案。`;
-        feedback.style.display = "block";
+        // 跳出對話框告知玩家答對了
+        alert(`🎉 恭喜你答對了！\n\n【解說】\n${dept.explanation}`);
+        
+        // 自動關閉對話框返回主畫面
+        closeModal();
 
-        const wrongBtn = document.getElementById(`opt-btn-${selectedIndex}`);
-        if(wrongBtn) {
-          wrongBtn.style.opacity = "0.5";
-          wrongBtn.style.pointerEvents = "none";
-        }
+      } else {
+        playWrongSound();
+        // 跳出對話框告知玩家答錯了
+        alert(`❌ 答錯囉！請仔細閱讀司官教誨後再試一次！`);
       }
     }
 
