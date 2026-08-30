@@ -375,13 +375,21 @@
       background: rgba(0,0,0,0.3);
       border-radius: 6px;
     }
+
+    .credits-footer {
+      margin-top: 15px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px dashed #4a3b33;
+      padding-top: 10px;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <h1>臺灣府城隍廟：《二十四司闖關尋寶》</h1>
-    <p>城隍爺麾下設二十四司分掌陰陽秩序。小心應答，生命有限，積累最高功德值解開稱號！</p>
+    <p>府城隍爺麾下設二十四司分掌陰陽秩序。小心應答，生命有限，積累最高功德值解開稱號！</p>
 
     <div class="stats-bar">
       <div class="stat-item">修道生命：<span id="lives-display" class="lives-box">❤️❤️❤️</span></div>
@@ -398,7 +406,6 @@
     <div class="dept-grid" id="dept-grid"></div>
   </div>
 
-  <!-- 題目 Modal -->
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
       <div class="modal-close-icon" onclick="closeModal()" title="返回選單">✕</div>
@@ -411,7 +418,6 @@
     </div>
   </div>
 
-  <!-- 單題結果 Overlay -->
   <div class="result-overlay" id="result-overlay">
     <div class="result-card" id="result-card">
       <div class="result-title" id="result-title"></div>
@@ -420,7 +426,6 @@
     </div>
   </div>
 
-  <!-- 通關/失敗 結算 Overlay -->
   <div class="result-overlay" id="final-overlay">
     <div class="result-card final-card">
       <div class="result-title" id="final-title"></div>
@@ -442,11 +447,11 @@
       },
       {
         id: "速報司", name: "速報司", desc: "掌管快速查辦善惡事蹟與緊急稟報",
-        dialogue: "「吾乃速報司！陽間凡人若有極大冤屈或殊勝善行，吾必定風馳電掣、即刻通報城隍爺知悉！」",
-        question: "速報司在城隍爺麾下的核心職責主要強調哪一種辦務風格？",
+        dialogue: "「吾乃速報司！陽間凡人若有極大冤屈或殊勝善行，吾必定風馳電掣、即刻通報府城隍爺知悉！」",
+        question: "速報司在府城隍爺麾下的核心職責主要強調哪一種辦務風格？",
         options: ["迅速回報、即時查核，處理急件與急冤", "慢慢審理，耗時數年", "專門負責編撰經典書籍", "負責掌管廟宇慶典儀軌"],
         answerText: "迅速回報、即時查核，處理急件與急冤",
-        explanation: "速報司講求「速辦速報」，負責將陽間急迫的善惡事項或冤情迅速呈報城隍爺。"
+        explanation: "速報司講求「速辦速報」，負責將陽間急迫的善惡事項或冤情迅速呈報府城隍爺。"
       },
       {
         id: "考功司", name: "考功司", desc: "掌管考核官吏與凡人功過等級",
@@ -458,8 +463,8 @@
       },
       {
         id: "感應司", name: "感應司", desc: "掌管記錄祈禱與感應順逆",
-        dialogue: "「人心生一念，天地悉皆知。凡人向城隍爺許願祈福，皆由吾感應司記錄其誠心與動機。」",
-        question: "感應司負責處理世人與城隍爺之間的聯繫，民間俗語「人心生一念，天地悉皆知」強調的是什麼？",
+        dialogue: "「人心生一念，天地悉皆知。凡人向府城隍爺許願祈福，皆由吾感應司記錄其誠心與動機。」",
+        question: "感應司負責處理世人與府城隍爺之間的聯繫，民間俗語「人心生一念，天地悉皆知」強調的是什麼？",
         options: ["只要心存善念，就算不說出口神明也能感知", "只有說出口的願望才會實現", "祈求時必須準備極為昂貴的供品", "只有白天祈禱才會獲得回應"],
         answerText: "只要心存善念，就算不說出口神明也能感知",
         explanation: "感應司負責察知起心動念，強調心念一動即有感應，起善念即獲善應。"
@@ -486,7 +491,7 @@
         question: "巡政司巡查的重點對象與事項主要為何？",
         options: ["地方官員政績、治世清廉度與民間疾苦", "商業店鋪的商品價格", "過往船隻的貨物稅收", "農田水源的分配"],
         answerText: "地方官員政績、治世清廉度與民間疾苦",
-        explanation: "巡政司代表城隍爺巡察陽間政事，監督官吏是否盡責清廉。"
+        explanation: "巡政司代表府城隍爺巡察陽間政事，監督官吏是否盡責清廉。"
       },
       {
         id: "督糧司", name: "督糧司", desc: "掌管糧食豐欠與農作收成民間福祉",
@@ -532,14 +537,14 @@
         id: "地獄司", name: "地獄司", desc: "掌管地獄審判過渡與陰司刑罰對接",
         dialogue: "「生前若造下深重罪業，死後必經地獄司審理轉送各殿受刑。勸世人早日懸崖勒馬、改過向善！」",
         question: "臺灣府城隍廟歷史悠久，廟內掛有著名匾額「爾來了」，這與地獄司威嚴審判有何呼應？",
-        options: ["歡迎大家經常來觀光", "招呼遠方朋友來喝茶", "告誡世人死亡終會到來，人人皆須前來接受生前善惡的大審判", "代表城隍爺邀請大家來拜拜"],
+        options: ["歡迎大家經常來觀光", "招呼遠方朋友來喝茶", "告誡世人死亡終會到來，人人皆須前來接受生前善惡的大審判", "代表府城隍爺邀請大家來拜拜"],
         answerText: "告誡世人死亡終會到來，人人皆須前來接受生前善惡的大審判",
         explanation: "臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到城隍面前接受陰司審判。"
       },
       {
         id: "驅疫司", name: "驅疫司", desc: "掌管驅除瘟疫、消災除病",
         dialogue: "「疫病虐行，生靈塗炭。吾驅疫司揮動法器掃盡邪祟瘟毒，護佑百姓安康健康的體魄！」",
-        question: "在傳統信仰中，當地方遭遇流行疫情時，民眾常祈求驅疫司與城隍爺進行何種儀式？",
+        question: "在傳統信仰中，當地方遭遇流行疫情時，民眾常祈求驅疫司與府城隍爺進行何種儀式？",
         options: ["關閉廟門不讓人進出", "建醮祈安、遶境巡巡出巡驅除邪祟瘟神", "舉辦歌唱比賽", "向河裡拋擲穀物"],
         answerText: "建醮祈安、遶境巡巡出巡驅除邪祟瘟神",
         explanation: "當發生疫病時，常透過建醮或城隍出巡遶境，請驅疫司清掃地方不正之氣。"
@@ -579,7 +584,7 @@
       {
         id: "文書司", name: "文書司", desc: "掌管撰寫、核發陰司牒文與疏文",
         dialogue: "「疏文通天達地，字字句句皆需規範。吾文書司負責校對與發放所有陰陽兩界的官方牒文。」",
-        question: "信眾在廟裡舉辦超度或祈福法會時，道士所焚燒呈給城隍爺的「疏文」，主要由何司處理？",
+        question: "信眾在廟裡舉辦超度或祈福法會時，道士所焚燒呈給府城隍爺的「疏文」，主要由何司處理？",
         options: ["軍備司", "築路司", "文書司", "水利司"],
         answerText: "文書司",
         explanation: "文書司專司正式公文與疏文牒冊的審核與轉呈。"
@@ -594,328 +599,4 @@
       },
       {
         id: "註壽司", name: "註壽司", desc: "掌管記錄世人壽元長短與添壽添齡",
-        dialogue: "「生死有命，富貴在天。然積德行善者，吾註壽司會在生死簿上為其添壽增齡！」",
-        question: "民間傳說中，「註壽司」掌管生死簿上的壽元，何種行為常被認為能獲神明添壽？",
-        options: ["經常與他人爭吵", "浪費資源食物", "戒殺護生、多做善事、孝順長輩", "通宵達旦沉迷娛樂"],
-        answerText: "戒殺護生、多做善事、孝順長輩",
-        explanation: "民間信仰認為戒殺放生、行善積德可獲得註壽司賜福添壽。"
-      },
-      {
-        id: "典籍司", name: "典籍司", desc: "掌管保管神聖經書典籍與歷史紀錄",
-        dialogue: "「經書乃智慧之源，典籍乃歷史之鏡。典籍司守護陰陽兩界經冊文獻，綿延文化智慧。」",
-        question: "典籍司的責任是保管書籍典籍，這在現代社會相當於何種機構的職能？",
-        options: ["體育館", "警察局", "急診室", "國家圖書館／檔案館"],
-        answerText: "國家圖書館／檔案館",
-        explanation: "典籍司典藏經書與古籍，如同圖書館與檔案館保存文化知識。"
-      },
-      {
-        id: "罰惡司", name: "罰惡司", desc: "掌管審理惡行與執行懲罰",
-        dialogue: "「善惡到頭終有報，只爭來早與來遲！凡作奸犯科、傷害他人者，罰惡司絕不姑息！」",
-        question: "罰惡司的神像造型多呈現怒目圓睜、威嚴凶猛，其主要目的為何？",
-        options: ["震懾作惡宵小，展現國法陰律之威嚴，使人不敢造惡", "嚇唬小朋友作樂", "因為神像製作時塗錯顏色", "為了吸引遊客拍照"],
-        answerText: "震懾作惡宵小，展現國法陰律之威嚴，使人不敢造惡",
-        explanation: "罰惡司青面獠牙或威嚴怒目，旨在警惕世人「作惡必懲」，達到震懾邪惡的效果。"
-      },
-      {
-        id: "檢簿司", name: "檢簿司", desc: "掌管查對功過簿冊、核實無誤",
-        dialogue: "「對帳查簿，嚴謹至極。功過簿上每一筆記載，吾檢簿司皆反覆查核，確保絲毫不差！」",
-        question: "檢簿司在二十四司中扮演著「複查與審計」的角色，這說明了陰司審判的何種特質？",
-        options: ["草率隨便", "可以靠關係塞錢關說", "憑運氣決定結果", "嚴謹客觀、查證確實、絕不冤枉好人亦不縱容壞人"],
-        answerText: "嚴謹客觀、查證確實、絕不冤枉好人亦不縱容壞人",
-        explanation: "檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
-      }
-    ];
-
-    let gameData = [];
-    let clearedDepts = new Set();
-    let score = 0;
-    let lives = 3;
-    let currentDeptIndex = null;
-    let attemptCount = 0; // 當前關卡嘗試錯誤次數
-    let audioCtx = null;
-
-    function shuffleArray(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-
-    function initGame() {
-      clearedDepts.clear();
-      score = 0;
-      lives = 3;
-
-      // 洗牌題目與選項
-      gameData = JSON.parse(JSON.stringify(rawDepartmentsData));
-      shuffleArray(gameData);
-
-      gameData.forEach(dept => {
-        const correctText = dept.answerText;
-        shuffleArray(dept.options);
-        dept.answer = dept.options.indexOf(correctText);
-      });
-
-      renderGrid();
-      updateStats();
-    }
-
-    function renderGrid() {
-      const grid = document.getElementById("dept-grid");
-      grid.innerHTML = "";
-
-      gameData.forEach((dept, index) => {
-        const card = document.createElement("div");
-        card.className = "dept-card";
-        card.id = `card-${index}`;
-        card.onclick = () => openModal(index);
-
-        card.innerHTML = `
-          <div class="dept-number">關卡 ${index + 1}</div>
-          <div class="dept-name">${dept.name}</div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function updateStats() {
-      document.getElementById("cleared-count").innerText = clearedDepts.size;
-      document.getElementById("score").innerText = score;
-      
-      let hearts = "";
-      for (let i = 0; i < 3; i++) {
-        hearts += i < lives ? "❤️" : "🖤";
-      }
-      document.getElementById("lives-display").innerText = hearts;
-    }
-
-    function openModal(index) {
-      if (clearedDepts.has(index)) return;
-
-      currentDeptIndex = index;
-      attemptCount = 0;
-      const dept = gameData[index];
-
-      document.getElementById("modal-dept-name").innerText = `${dept.name}（${dept.desc}）`;
-      document.getElementById("modal-dialogue").innerText = dept.dialogue;
-      document.getElementById("modal-question").innerText = `【考題】${dept.question}`;
-      
-      renderOptions();
-      document.getElementById("modal").classList.add("active");
-    }
-
-    function renderOptions() {
-      const dept = gameData[currentDeptIndex];
-      const optionsContainer = document.getElementById("modal-options");
-      optionsContainer.innerHTML = "";
-
-      dept.options.forEach((opt, optIdx) => {
-        const btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
-        btn.onclick = () => checkAnswer(optIdx);
-        optionsContainer.appendChild(btn);
-      });
-    }
-
-    function checkAnswer(selectedIndex) {
-      const dept = gameData[currentDeptIndex];
-      const resultOverlay = document.getElementById("result-overlay");
-      const resultCard = document.getElementById("result-card");
-      const resultTitle = document.getElementById("result-title");
-      const resultExplanation = document.getElementById("result-explanation");
-      const actionBtn = document.getElementById("result-action-btn");
-
-      if (selectedIndex === dept.answer) {
-        playCorrectSound();
-        
-        // 得分計算：首刷100分，每錯一次扣20分（最低得20分）
-        let earnedScore = Math.max(20, 100 - (attemptCount * 20));
-        score += earnedScore;
-        
-        clearedDepts.add(currentDeptIndex);
-        document.getElementById(`card-${currentDeptIndex}`).classList.add("cleared");
-        updateStats();
-
-        resultCard.className = "result-card correct";
-        resultTitle.innerText = `🎉 答對囉！（+${earnedScore}功德）`;
-        resultExplanation.innerHTML = `<b>【典故解析】</b><br>${dept.explanation}`;
-
-        if (clearedDepts.size === gameData.length) {
-          actionBtn.className = "action-btn next-btn";
-          actionBtn.innerText = "🏆 通關結算 ➔";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            closeModal();
-            showFinalResult(true);
-          };
-        } else {
-          actionBtn.className = "action-btn next-btn";
-          actionBtn.innerText = "下一關 ➔";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            goToNextStage();
-          };
-        }
-
-      } else {
-        playWrongSound();
-        attemptCount++;
-        lives--;
-        updateStats(); // 答錯即刻更新頂部血條（如 ❤️❤️🖤）
-
-        resultCard.className = "result-card wrong";
-        
-        if (lives <= 0) {
-          resultTitle.innerText = "💔 修道生命耗盡！";
-          resultExplanation.innerText = "城隍爺提醒：心浮氣躁易生妄念，請再接再厲重新修鍊！";
-          actionBtn.className = "action-btn retry-btn";
-          actionBtn.innerText = "💀 觀看遊戲結算";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            closeModal();
-            showFinalResult(false);
-          };
-        } else {
-          resultTitle.innerText = `❌ 答錯囉！（扣 1 滴血，剩餘 ${lives} 滴血）`;
-          resultExplanation.innerText = `提示：此題若答對將扣減分數（目前最高可得 ${Math.max(20, 100 - (attemptCount * 20))} 分），請仔細思考後再試！`;
-          actionBtn.className = "action-btn retry-btn";
-          actionBtn.innerText = "🔄 繼續嘗試本題";
-          actionBtn.onclick = () => {
-            closeResultOverlay();
-            renderOptions(); // 重新渲染題目按鈕
-          };
-        }
-      }
-
-      resultOverlay.classList.add("active");
-    }
-
-    function showFinalResult(isWin) {
-      const finalOverlay = document.getElementById("final-overlay");
-      const finalTitle = document.getElementById("final-title");
-      const finalRank = document.getElementById("final-rank");
-      const finalBody = document.getElementById("final-body");
-
-      let rank = "";
-      if (score === 2400) {
-        rank = "🏆 神級：城隍爺親傳弟子";
-        triggerGoldShower();
-      } else if (score >= 2000) {
-        rank = "🥇 特優：府城功德大師";
-      } else if (score >= 1500) {
-        rank = "🥈 良善：陰陽界熱心志工";
-      } else {
-        rank = "🥉 新手：初入城隍廟修行者";
-      }
-
-      if (isWin) {
-        finalTitle.innerText = "🎉 圓滿通過二十四司考驗！";
-        finalTitle.style.color = "var(--gold-accent)";
-        finalRank.innerText = rank;
-        finalBody.innerHTML = `
-          最終獲得總功德值：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分！<br>
-          突破關卡：<b>24 / 24</b><br><br>
-          ${score === 2400 ? '<b>完美零失誤！解開隱藏極致稱號！</b>' : '想要挑戰滿分 2400 分拿到完美稱號嗎？歡迎再次重新挑戰！'}
-        `;
-      } else {
-        finalTitle.innerText = "📜 功德尚未圓滿，仍需修鍊";
-        finalTitle.style.color = "#ff6b6b";
-        finalRank.innerText = rank;
-        finalBody.innerHTML = `
-          本次得分：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分<br>
-          已突破關卡：<b>${clearedDepts.size} / 24</b><br><br>
-          修道過程考驗定性，調整心態後再試一次吧！
-        `;
-      }
-
-      finalOverlay.classList.add("active");
-    }
-
-    function confirmRestart() {
-      if (confirm("確定要放棄當前進度重新開始遊戲嗎？")) {
-        initGame();
-      }
-    }
-
-    function resetGame() {
-      document.getElementById("final-overlay").classList.remove("active");
-      initGame();
-    }
-
-    function closeResultOverlay() {
-      document.getElementById("result-overlay").classList.remove("active");
-    }
-
-    function goToNextStage() {
-      let nextIndex = (currentDeptIndex + 1) % gameData.length;
-      for (let i = 0; i < gameData.length; i++) {
-        let checkIdx = (currentDeptIndex + 1 + i) % gameData.length;
-        if (!clearedDepts.has(checkIdx)) {
-          nextIndex = checkIdx;
-          break;
-        }
-      }
-      openModal(nextIndex);
-    }
-
-    function closeModal() {
-      document.getElementById("modal").classList.remove("active");
-    }
-
-    function getAudioContext() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      return audioCtx;
-    }
-
-    function playCorrectSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(523.25, now);
-        osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3);
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.4);
-      } catch (e) {}
-    }
-
-    function playWrongSound() {
-      try {
-        const ctx = getAudioContext();
-        const now = ctx.currentTime;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.exponentialRampToValueAtTime(80, now + 0.2);
-        gain.gain.setValueAtTime(0.4, now);
-        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.2);
-      } catch (e) {}
-    }
-
-    function triggerGoldShower() {
-      var duration = 4 * 1000;
-      var end = Date.now() + duration;
-      (function frame() {
-        confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#d4af37', '#ffd700', '#8b0000'] });
-        confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#d4af37', '#ffd700', '#8b0000'] });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
-    }
-
-    window.onload = initGame;
-  </script>
-</body>
-</html>
+        dialogue: "「生死有命，富貴在天。然積德行善
