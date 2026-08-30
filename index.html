@@ -805,6 +805,7 @@
 
     function renderGrid() {
       const grid = document.getElementById("dept-grid");
+      if (!grid) return;
       grid.innerHTML = "";
 
       gameData.forEach((dept, index) => {
@@ -1056,6 +1057,7 @@
       })();
     }
 
+    document.addEventListener("DOMContentLoaded", initGame);
     window.onload = initGame;
   </script>
 </body>
