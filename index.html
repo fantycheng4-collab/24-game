@@ -35,7 +35,7 @@
     header {
       background: linear-gradient(180deg, #3a0d0d 0%, var(--bg-dark) 100%);
       border-bottom: 2px solid var(--gold-accent);
-      padding: 25px 20px;
+      padding: 25px 20px 15px 20px;
       text-align: center;
     }
 
@@ -51,7 +51,16 @@
       color: var(--text-muted);
       font-size: 1rem;
       max-width: 800px;
-      margin: 0 auto 15px auto;
+      margin: 0 auto 10px auto;
+    }
+
+    .author-tag {
+      font-size: 0.9rem;
+      color: var(--gold-accent);
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      font-weight: 500;
+      opacity: 0.9;
     }
 
     .stats-bar {
@@ -62,7 +71,7 @@
       padding: 12px;
       border-radius: 8px;
       max-width: 600px;
-      margin: 15px auto 0 auto;
+      margin: 10px auto 0 auto;
       border: 1px solid #44342d;
     }
 
@@ -376,12 +385,13 @@
       border-radius: 6px;
     }
 
-    .credits-footer {
-      margin-top: 15px;
-      font-size: 0.85rem;
+    .page-footer {
+      text-align: center;
       color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 40px;
+      padding-top: 20px;
       border-top: 1px dashed #4a3b33;
-      padding-top: 10px;
     }
   </style>
 </head>
@@ -390,6 +400,7 @@
   <header>
     <h1>臺灣府城隍廟：《二十四司闖關尋寶》</h1>
     <p>府城隍爺麾下設二十四司分掌陰陽秩序。小心應答，生命有限，積累最高功德值解開稱號！</p>
+    <div class="author-tag">臺灣府城隍廟志工小V 敬製</div>
 
     <div class="stats-bar">
       <div class="stat-item">修道生命：<span id="lives-display" class="lives-box">❤️❤️❤️</span></div>
@@ -404,8 +415,13 @@
       <button class="restart-btn" onclick="confirmRestart()">🔄 重新開局</button>
     </div>
     <div class="dept-grid" id="dept-grid"></div>
+
+    <div class="page-footer">
+      臺灣府城隍廟志工小V 敬製
+    </div>
   </div>
 
+  <!-- 題目 Modal -->
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
       <div class="modal-close-icon" onclick="closeModal()" title="返回選單">✕</div>
@@ -418,6 +434,7 @@
     </div>
   </div>
 
+  <!-- 單題結果 Overlay -->
   <div class="result-overlay" id="result-overlay">
     <div class="result-card" id="result-card">
       <div class="result-title" id="result-title"></div>
@@ -426,6 +443,7 @@
     </div>
   </div>
 
+  <!-- 通關/失敗 結算 Overlay -->
   <div class="result-overlay" id="final-overlay">
     <div class="result-card final-card">
       <div class="result-title" id="final-title"></div>
@@ -441,162 +459,604 @@
         id: "陰陽司", name: "陰陽司", desc: "掌管陰陽兩界事務、總管二十四司之首",
         dialogue: "「老夫陰陽司官，統籌陰陽兩界善惡帳目。世人以為舉頭三尺無神明，殊不知陰陽循環，報應不爽！」",
         question: "在臺灣府城隍廟中，陰陽司官的神像外貌最顯著的特徵是什麼？象徵著什麼涵義？",
-        options: ["一手執筆一手拿簿冊，象徵隨時記錄", "臉孔半黑半白（或半金半黑），象徵貫通陰陽、明辨黑白", "身穿金色龍袍，象徵威嚴無比", "雙眼閉合，象徵心如止水"],
-        answerText: "臉孔半黑半白（或半金半黑），象徵貫通陰陽、明辨黑白",
+        options: [
+          "手執硃砂筆與生死簿冊，象徵紀錄善惡",
+          "面孔呈黑白各半，象徵貫通陰陽明辨黑白",
+          "身穿金絲龍袍大氅，象徵威嚴肅穆無比",
+          "雙目微閉面帶慈祥，象徵心如止水超然"
+        ],
+        answerText: "面孔呈黑白各半，象徵貫通陰陽明辨黑白",
         explanation: "陰陽司官神像面孔常呈現半黑半白（或半黑半金），代表其橫跨陰陽兩界、公正不阿、審理黑白善惡之意。"
       },
       {
         id: "速報司", name: "速報司", desc: "掌管快速查辦善惡事蹟與緊急稟報",
         dialogue: "「吾乃速報司！陽間凡人若有極大冤屈或殊勝善行，吾必定風馳電掣、即刻通報府城隍爺知悉！」",
         question: "速報司在府城隍爺麾下的核心職責主要強調哪一種辦務風格？",
-        options: ["迅速回報、即時查核，處理急件與急冤", "慢慢審理，耗時數年", "專門負責編撰經典書籍", "負責掌管廟宇慶典儀軌"],
-        answerText: "迅速回報、即時查核，處理急件與急冤",
+        options: [
+          "迅速回報即時查核，專專處理急件與急冤",
+          "嚴謹研判深入查證，耗時數年審慎結案",
+          "整理經典撰寫歷史，傳承廟宇文化典籍",
+          "籌備祭典主持儀軌，維護廟堂日常秩序"
+        ],
+        answerText: "迅速回報即時查核，專專處理急件與急冤",
         explanation: "速報司講求「速辦速報」，負責將陽間急迫的善惡事項或冤情迅速呈報府城隍爺。"
       },
       {
         id: "考功司", name: "考功司", desc: "掌管考核官吏與凡人功過等級",
         dialogue: "「行善有多少，作惡有幾分？老夫考功司，細查你一生功過評等，絲毫不得作假！」",
         question: "「考功」一詞源自古代官制，主要指的是下列何者？",
-        options: ["考試考取功名", "考證歷史功勞", "考核績效與評定功過升降", "考驗武藝技能"],
-        answerText: "考核績效與評定功過升降",
+        options: [
+          "參加科舉考試以考取朝廷功名",
+          "考證歷史文獻紀錄賢能者功勞",
+          "考核績效表現與評定功過升降",
+          "考驗武藝技能與軍事作戰實力"
+        ],
+        answerText: "考核績效表現與評定功過升降",
         explanation: "考功司源自古代吏部的考功清吏司，專門負責考察官員（及凡人）的績效表現與評估功過。"
       },
       {
         id: "感應司", name: "感應司", desc: "掌管記錄祈禱與感應順逆",
         dialogue: "「人心生一念，天地悉皆知。凡人向府城隍爺許願祈福，皆由吾感應司記錄其誠心與動機。」",
         question: "感應司負責處理世人與府城隍爺之間的聯繫，民間俗語「人心生一念，天地悉皆知」強調的是什麼？",
-        options: ["只要心存善念，就算不說出口神明也能感知", "只有說出口的願望才會實現", "祈求時必須準備極為昂貴的供品", "只有白天祈禱才會獲得回應"],
-        answerText: "只要心存善念，就算不說出口神明也能感知",
+        options: [
+          "只要心存善念，就算未開口神明亦能察知",
+          "必須公開大聲說出願望，神明才能聽到",
+          "必須準備極為昂貴之供品，方能獲回應",
+          "只有在日間虔誠祈禱，神明才會感應到"
+        ],
+        answerText: "只要心存善念，就算未開口神明亦能察知",
         explanation: "感應司負責察知起心動念，強調心念一動即有感應，起善念即獲善應。"
       },
       {
         id: "保安司", name: "保安司", desc: "掌管保佑地方平安與治安衛戍",
         dialogue: "「保一方平安，守合境安寧！凡有邪魔歪道想侵犯府城民間，先過吾保安司這一關！」",
         question: "保安司的主要職掌與民間哪項祈求最為貼近？",
-        options: ["求取高官厚祿", "祈求合家平安、地方風調雨順無災禍", "求取考試滿分", "祈求延年益壽"],
-        answerText: "祈求合家平安、地方風調雨順無災禍",
+        options: [
+          "祈求官運亨通步步高升",
+          "祈求合家平安地方安寧",
+          "祈求科舉考試金榜題名",
+          "祈求延年益壽長命百歲"
+        ],
+        answerText: "祈求合家平安地方安寧",
         explanation: "保安司意即「保衛平安」，負責維護境內安寧與地方秩序。"
       },
       {
         id: "提刑司", name: "提刑司", desc: "掌管刑罰執行與司法審理",
-        dialogue: "「法網恢恢，疏而不漏。作惡多端者，提刑司必依陰律嚴加審理，絕不寬貸！」",
+        dialogue: "「法網恢恢，疏而不漏。作惡多端者，提刑司必依陰律嚴加審理，絕不寬贷！」",
         question: "古代的「提刑官」（如提刑按察使）主要負責何種事務？",
-        options: ["督導農業生產", "管理國家財政收支", "掌管司法、刑獄與監察", "負責教育科舉考試"],
-        answerText: "掌管司法、刑獄與監察",
+        options: [
+          "督導地方農業生產與水利興修",
+          "管理國家財政稅收與物資調配",
+          "掌管司法刑獄審理與巡查監察",
+          "負責教育推廣與科舉選拔考試"
+        ],
+        answerText: "掌管司法刑獄審理與巡查監察",
         explanation: "提刑司專司刑獄審理與司法懲戒，確保正義得以伸張。"
       },
       {
         id: "巡政司", name: "巡政司", desc: "掌管巡查地方政績與陽官善惡",
         dialogue: "「陽間官吏治世，是否有貪贓枉法或愛民如子？吾巡政司日夜巡視，記錄無遺。」",
         question: "巡政司巡查的重點對象與事項主要為何？",
-        options: ["地方官員政績、治世清廉度與民間疾苦", "商業店鋪的商品價格", "過往船隻的貨物稅收", "農田水源的分配"],
-        answerText: "地方官員政績、治世清廉度與民間疾苦",
+        options: [
+          "地方官員政績、治世清廉與民間疾苦",
+          "商業店鋪貨品價格與秩序維護",
+          "過往港口船隻之貨物稅收與通關證",
+          "農田灌溉水源分配與水利設施維護"
+        ],
+        answerText: "地方官員政績、治世清廉與民間疾苦",
         explanation: "巡政司代表府城隍爺巡察陽間政事，監督官吏是否盡責清廉。"
       },
       {
         id: "督糧司", name: "督糧司", desc: "掌管糧食豐欠與農作收成民間福祉",
         dialogue: "「民以食為天！珍惜糧食者得福報，浪費踐踏農作物者，吾督糧司定記下一筆罪過！」",
         question: "在傳統農業社會中，督糧司的職責最直接關乎民間何事？",
-        options: ["道路與橋樑興建", "軍隊兵器製造", "海邊漁業捕撈", "糧食收成、米穀倉儲與珍惜食糧之德"],
-        answerText: "糧食收成、米穀倉儲與珍惜食糧之德",
+        options: [
+          "城池道路興建與橋樑維護管理",
+          "軍隊兵器製造與邊防糧餉籌措",
+          "沿海漁業捕撈與水產貿易運銷",
+          "糧食收成倉儲與珍惜食糧之德"
+        ],
+        answerText: "糧食收成倉儲與珍惜食糧之德",
         explanation: "督糧司掌管民間民生基石——糧食與農穀，並懲戒浪費糧食者。"
       },
       {
         id: "註福司", name: "註福司", desc: "掌管賜予福氣與累積善果之登記",
         dialogue: "「積善之家，必有餘慶。凡行善積德之人，吾註福司會在福壽簿上為你添上幾分福報！」",
         question: "想要獲得註福司賜予福報，根據城隍信仰，最根本的途徑是什麼？",
-        options: ["花費重金購買名貴法器", "多做善事、累積陰德、心存慈悲", "每天睡覺滿十個小時", "找尋地理風水寶地"],
-        answerText: "多做善事、累積陰德、心存慈悲",
+        options: [
+          "花費巨資購買名貴開光法器",
+          "多做善事累積陰德心存慈悲",
+          "維持充足睡眠每日滿十小時",
+          "尋找風水寶地修建祖先墳墓"
+        ],
+        answerText: "多做善事累積陰德心存慈悲",
         explanation: "「註福司」根據人的善行修為登記福報，強調「禍福無門，唯人自召」。"
       },
       {
         id: "儀禮司", name: "儀禮司", desc: "掌管禮樂儀軌、祭祀規範與尊卑秩序",
         dialogue: "「國有國法，廟有廟禮。儀禮司掌祭祀禮節，世人拜神祈福亦當尊敬誠懇，不可輕慢！」",
         question: "前往城隍廟參拜時，遵循「儀禮司」規範，下列何者是正確的參拜態度？",
-        options: ["大聲喧嘩並隨手拋棄垃圾", "隨意撫摸神像與法器", "爭先恐後插隊插香", "心存敬意、衣著整潔、舉止端莊且禮儀得宜"],
-        answerText: "心存敬意、衣著整潔、舉止端莊且禮儀得宜",
+        options: [
+          "大聲喧嘩並於廟內拋棄垃圾",
+          "隨意觸摸神像與桌上法器物品",
+          "爭先恐後插隊搶先插香祭拜",
+          "心存敬意衣著整潔舉止端莊"
+        ],
+        answerText: "心存敬意衣著整潔舉止端莊",
         explanation: "儀禮司規範禮節，參拜神明時端莊誠懇、遵守禮儀方能表達敬意。"
       },
       {
         id: "賞善司", name: "賞善司", desc: "掌管審核善行並賜予應有獎賞",
         dialogue: "「莫以善小而不為！凡有孝順父母、救人濟世者，吾賞善司必頒賜善報，護佑其後代昌盛！」",
         question: "賞善司與罰惡司常並列於廟堂兩側，賞善司手持的執掌道具或象徵通常為何？",
-        options: ["刑杖與鐵鍊", "「賞善簿」與判官筆（或善惡分明之牌）", "算盤與金元寶", "寶劍與盾牌"],
-        answerText: "「賞善簿」與判官筆（或善惡分明之牌）",
+        options: [
+          "嚴刑拷打之刑杖與鐵鍊法具",
+          "賞善簿冊與公正審核之硃筆",
+          "計算功過之算盤與金銀元寶",
+          "降妖伏魔之寶劍與防禦盾牌"
+        ],
+        answerText: "賞善簿冊與公正審核之硃筆",
         explanation: "賞善司掌管「賞善簿」，詳細記載世人所做大小善事並給予相應善報。"
       },
       {
         id: "稽查司", name: "稽查司", desc: "掌管搜查奸邪、細查隱密罪過",
         dialogue: "「暗室欺心，神目如電！以為私下做的惡事無人知曉？吾稽查司早已調查得一清二楚！」",
         question: "稽查司主要發揮的作用是什麼？",
-        options: ["負責廟宇的財務會計", "明察暗訪，深入調查隱瞞或未發覺的善惡事實", "指導農夫如何播種", "編寫宗教歌謠"],
-        answerText: "明察暗訪，深入調查隱瞞或未發覺的善惡事實",
+        options: [
+          "負責掌管廟宇每日財務會計帳目",
+          "明察暗訪深入調查隱密善惡事實",
+          "指導農民於四季如何播種與耕作",
+          "編寫宗教歌謠與讚頌神明之詩篇"
+        ],
+        answerText: "明察暗訪深入調查隱密善惡事實",
         explanation: "稽查司如同神界調查局，負責稽查世間隱秘不為人知的善惡真相。"
       },
       {
         id: "地獄司", name: "地獄司", desc: "掌管地獄審判過渡與陰司刑罰對接",
         dialogue: "「生前若造下深重罪業，死後必經地獄司審理轉送各殿受刑。勸世人早日懸崖勒馬、改過向善！」",
         question: "臺灣府城隍廟歷史悠久，廟內掛有著名匾額「爾來了」，這與地獄司威嚴審判有何呼應？",
-        options: ["歡迎大家經常來觀光", "招呼遠方朋友來喝茶", "告誡世人死亡終會到來，人人皆須前來接受生前善惡的大審判", "代表府城隍爺邀請大家來拜拜"],
-        answerText: "告誡世人死亡終會到來，人人皆須前來接受生前善惡的大審判",
+        options: [
+          "熱烈歡迎各地遊客前來觀光參訪",
+          "親切打招呼邀請遠方朋友前來喝茶",
+          "警示世人終將面臨生前善惡大審判",
+          "代表府城隍爺邀請信眾常來參拜"
+        ],
+        answerText: "警示世人終將面臨生前善惡大審判",
         explanation: "臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到城隍面前接受陰司審判。"
       },
       {
         id: "驅疫司", name: "驅疫司", desc: "掌管驅除瘟疫、消災除病",
         dialogue: "「疫病虐行，生靈塗炭。吾驅疫司揮動法器掃盡邪祟瘟毒，護佑百姓安康健康的體魄！」",
         question: "在傳統信仰中，當地方遭遇流行疫情時，民眾常祈求驅疫司與府城隍爺進行何種儀式？",
-        options: ["關閉廟門不讓人進出", "建醮祈安、遶境巡巡出巡驅除邪祟瘟神", "舉辦歌唱比賽", "向河裡拋擲穀物"],
-        answerText: "建醮祈安、遶境巡巡出巡驅除邪祟瘟神",
+        options: [
+          "緊閉廟門謝絕所有信眾進出參拜",
+          "建醮祈安並遶境出巡驅除邪祟瘟神",
+          "舉辦大型歌唱與文藝表演比賽活動",
+          "向附近河川拋擲米穀與各類供品"
+        ],
+        answerText: "建醮祈安並遶境出巡驅除邪祟瘟神",
         explanation: "當發生疫病時，常透過建醮或城隍出巡遶境，請驅疫司清掃地方不正之氣。"
       },
       {
         id: "掌案司", name: "掌案司", desc: "掌管管理各項陰司訴訟案卷公文",
         dialogue: "「訴訟條目、告狀卷宗，皆由吾掌案司歸檔整理。千百年來案件無一遺漏、井井有條！」",
         question: "掌案司的功能類似於現代行政或司法機關中的哪一個部門？",
-        options: ["消防局", "衛生局", "環保局", "檔案室／紀錄科／法院書記官"],
-        answerText: "檔案室／紀錄科／法院書記官",
+        options: [
+          "負責搶救災害與緊急救援之消防局",
+          "負責公眾健康與防疫衛生的衛生局",
+          "負責環境保護與垃圾處理之環保局",
+          "負責管理檔案卷宗與紀錄之法院書記官"
+        ],
+        answerText: "負責管理檔案卷宗與紀錄之法院書記官",
         explanation: "掌案司負責管理陰陽兩界交辦的各項案件卷宗與檔案。"
       },
       {
         id: "察過司", name: "察過司", desc: "掌管察覺與記錄凡人的微小過錯與過失",
         dialogue: "「莫以惡小而為之！無心之過可改，有心之惡難逃。察過司細察微瑕，勸人時時反省自己。」",
         question: "察過司特別強調「察過」，這提醒了世人何種修身養性的道理？",
-        options: ["別人的過錯與我無關", "每天要檢討反省自身小缺失，及時改正，以免積小惡成大禍", "犯了錯只要沒人看見就沒關係", "只要大事不做惡，小事隨便沒關係"],
-        answerText: "每天要檢討反省自身小缺失，及時改正，以免積小惡成大禍",
+        options: [
+          "他人之過錯與己無關無需多加過問",
+          "每日檢討反省小缺失以防積小惡成大過",
+          "犯錯只要未被他人發現便無須介意",
+          "只要大事不違法小事隨便無傷大雅"
+        ],
+        answerText: "每日檢討反省小缺失以防積小惡成大過",
         explanation: "察過司提醒人們「吾日三省吾身」，注意細節與小過失，及時惕勵改過。"
       },
       {
         id: "良愿司", name: "良愿司", desc: "掌管登記與協助實現善願良好誓願",
         dialogue: "「凡發宏願救人、發善願利他者，良愿司必呈報城隍，助其善願圓滿實現！」",
         question: "許願時若想得到良愿司的護持，許下的願望性質應該為何？",
-        options: ["祈求自己買彩券中大獎後獨吞", "祈求詛咒討厭的人遭遇不測", "發願行善濟世、孝順父母或幫助弱勢的利他善願", "祈求不用努力就能獲得成功"],
-        answerText: "發願行善濟世、孝順父母或幫助弱勢的利他善願",
+        options: [
+          "祈求自己中彩券大獎後獨自享用",
+          "祈求詛咒競爭對手遭遇不測災禍",
+          "發願行善濟世孝順父母利他善願",
+          "祈求無須付出努力即可獲得成功"
+        ],
+        answerText: "發願行善濟世孝順父母利他善願",
         explanation: "良愿司專門登記並協助實現「良善誓願」，強調發心必須純正利他。"
       },
       {
         id: "功曹司", name: "功曹司", desc: "掌管記錄功德時間與記錄值日文書傳遞",
         dialogue: "「吾乃功曹司，專司記錄每時每刻世人的功德與善行，並負責傳遞陰陽界之飛符公文！」",
         question: "道教與城隍信仰常有「四值功曹」（值年、值月、值日、值時），功曹司的核心能力是什麼？",
-        options: ["精密記錄時間點與及時傳遞神聖公文傳單", "穿越時空改變歷史", "掌管陰間土地買賣", "預測明日天氣變化"],
-        answerText: "精密記錄時間點與及時傳遞神聖公文傳單",
+        options: [
+          "精密記錄時間點與及時傳遞神聖公文",
+          "穿越時空回到過去改變歷史既定事實",
+          "掌管陰間地府所有土地房屋買賣契約",
+          "預測明日氣象變化與氣溫降雨機率"
+        ],
+        answerText: "精密記錄時間點與及時傳遞神聖公文",
         explanation: "功曹司為紀錄與傳遞公文之官，負責將陽間祭禱與功德精確記載並呈報。"
       },
       {
         id: "文書司", name: "文書司", desc: "掌管撰寫、核發陰司牒文與疏文",
         dialogue: "「疏文通天達地，字字句句皆需規範。吾文書司負責校對與發放所有陰陽兩界的官方牒文。」",
         question: "信眾在廟裡舉辦超度或祈福法會時，道士所焚燒呈給府城隍爺的「疏文」，主要由何司處理？",
-        options: ["軍備司", "築路司", "文書司", "水利司"],
-        answerText: "文書司",
+        options: [
+          "掌管武器裝備之軍備司",
+          "掌管工程建設之築路司",
+          "掌管公文疏文之文書司",
+          "掌管水利灌溉之水利司"
+        ],
+        answerText: "掌管公文疏文之文書司",
         explanation: "文書司專司正式公文與疏文牒冊的審核與轉呈。"
       },
       {
         id: "學政司", name: "學政司", desc: "掌管文風教化、學子功名與文運",
         dialogue: "「十年寒窗無人問，一舉成名天下知。學政司保佑苦讀學子文章寫作與考運亨通，但前提是品德端正！」",
         question: "古時臺灣府為全臺文化發祥地，學政司與城隍廟中的文昌帝君信仰相呼應，主要庇佑何事？",
-        options: ["航海捕魚順利", "學業進步、考試功名與品德教化", "身體鍛鍊健美", "房屋興建穩固"],
-        answerText: "學業進步、考試功名與品德教化",
+        options: [
+          "出海捕魚風平浪靜滿載而歸",
+          "學業進步科舉功名品德教化",
+          "鍛鍊體魄強身健體強健肌肉",
+          "建造房屋結構穩固防範地震"
+        ],
+        answerText: "學業進步科舉功名品德教化",
         explanation: "學政司掌管教育學政與科舉考試，提倡尊師重道與文風教化。"
       },
       {
         id: "註壽司", name: "註壽司", desc: "掌管記錄世人壽元長短與添壽添齡",
-        dialogue: "「生死有命，富貴在天。然積德行善
+        dialogue: "「生死有命，富貴在天。然積德行善者，吾註壽司會在生死簿上為其添壽增齡！」",
+        question: "民間傳說中，「註壽司」掌管生死簿上的壽元，何種行為常被認為能獲神明添壽？",
+        options: [
+          "經常與他人起爭執口角衝突",
+          "任意浪費自然資源與珍貴食物",
+          "戒殺護生多做善事孝順長輩",
+          "通宵達旦沉迷娛樂損害健康"
+        ],
+        answerText: "戒殺護生多做善事孝順長輩",
+        explanation: "民間信仰認為戒殺放生、行善積德可獲得註壽司賜福添壽。"
+      },
+      {
+        id: "典籍司", name: "典籍司", desc: "掌管保管神聖經書典籍與歷史紀錄",
+        dialogue: "「經書乃智慧之源，典籍司守護陰陽兩界經冊文獻，綿延文化智慧。」",
+        question: "典籍司的責任是保管書籍典籍，這在現代社會相當於何種機構的職能？",
+        options: [
+          "舉辦體育賽事活動之體育館",
+          "維護社會治安執法之警察局",
+          "提供緊急醫療救治之醫院急診室",
+          "典藏書籍與文化歷史之國家圖書館"
+        ],
+        answerText: "典藏書籍與文化歷史之國家圖書館",
+        explanation: "典籍司典藏經書與古籍，如同圖書館與檔案館保存文化知識。"
+      },
+      {
+        id: "罰惡司", name: "罰惡司", desc: "掌管審理惡行與執行懲罰",
+        dialogue: "「善惡到頭終有報，只爭來早與來遲！凡作奸犯科、傷害他人者，罰惡司絕不姑息！」",
+        question: "罰惡司的神像造型多呈現怒目圓睜、威嚴凶猛，其主要目的為何？",
+        options: [
+          "震懾作惡宵小展現陰律威嚴",
+          "隨機嚇唬前來參拜之小朋友",
+          "雕刻時塗錯顏料所造成之誤會",
+          "為了吸引遊客拍照留念打卡"
+        ],
+        answerText: "震懾作惡宵小展現陰律威嚴",
+        explanation: "罰惡司青面獠牙或威嚴怒目，旨在警惕世人「作惡必懲」，達到震懾邪惡的效果。"
+      },
+      {
+        id: "檢簿司", name: "檢簿司", desc: "掌管查對功過簿冊、核實無誤",
+        dialogue: "「對帳查簿，嚴謹至極。功過簿上每一筆記載，吾檢簿司皆反覆查核，確保絲毫不差！」",
+        question: "檢簿司在二十四司中扮演著「複查與審計」的角色，這說明了陰司審判的何種特質？",
+        options: [
+          "辦理案件草率隨便缺乏標準",
+          "可以透過關係私下賄賂關說",
+          "完全憑藉運氣隨機決定結果",
+          "嚴謹客觀查證確實不枉不縱"
+        ],
+        answerText: "嚴謹客觀查證確實不枉不縱",
+        explanation: "檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
+      }
+    ];
+
+    let gameData = [];
+    let clearedDepts = new Set();
+    let score = 0;
+    let lives = 3;
+    let currentDeptIndex = null;
+    let attemptCount = 0;
+    let audioCtx = null;
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function initGame() {
+      clearedDepts.clear();
+      score = 0;
+      lives = 3;
+
+      gameData = JSON.parse(JSON.stringify(rawDepartmentsData));
+      shuffleArray(gameData);
+
+      gameData.forEach(dept => {
+        const correctText = dept.answerText;
+        shuffleArray(dept.options);
+        dept.answer = dept.options.indexOf(correctText);
+      });
+
+      renderGrid();
+      updateStats();
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById("dept-grid");
+      grid.innerHTML = "";
+
+      gameData.forEach((dept, index) => {
+        const card = document.createElement("div");
+        card.className = "dept-card";
+        card.id = `card-${index}`;
+        card.onclick = () => openModal(index);
+
+        card.innerHTML = `
+          <div class="dept-number">關卡 ${index + 1}</div>
+          <div class="dept-name">${dept.name}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function updateStats() {
+      document.getElementById("cleared-count").innerText = clearedDepts.size;
+      document.getElementById("score").innerText = score;
+      
+      let hearts = "";
+      for (let i = 0; i < 3; i++) {
+        hearts += i < lives ? "❤️" : "🖤";
+      }
+      document.getElementById("lives-display").innerText = hearts;
+    }
+
+    function openModal(index) {
+      if (clearedDepts.has(index)) return;
+
+      currentDeptIndex = index;
+      attemptCount = 0;
+      const dept = gameData[index];
+
+      document.getElementById("modal-dept-name").innerText = `${dept.name}（${dept.desc}）`;
+      document.getElementById("modal-dialogue").innerText = dept.dialogue;
+      document.getElementById("modal-question").innerText = `【考題】${dept.question}`;
+      
+      renderOptions();
+      document.getElementById("modal").classList.add("active");
+    }
+
+    function renderOptions() {
+      const dept = gameData[currentDeptIndex];
+      const optionsContainer = document.getElementById("modal-options");
+      optionsContainer.innerHTML = "";
+
+      dept.options.forEach((opt, optIdx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = `${String.fromCharCode(65 + optIdx)}. ${opt}`;
+        btn.onclick = () => checkAnswer(optIdx);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selectedIndex) {
+      const dept = gameData[currentDeptIndex];
+      const resultOverlay = document.getElementById("result-overlay");
+      const resultCard = document.getElementById("result-card");
+      const resultTitle = document.getElementById("result-title");
+      const resultExplanation = document.getElementById("result-explanation");
+      const actionBtn = document.getElementById("result-action-btn");
+
+      if (selectedIndex === dept.answer) {
+        playCorrectSound();
+        
+        let earnedScore = Math.max(20, 100 - (attemptCount * 20));
+        score += earnedScore;
+        
+        clearedDepts.add(currentDeptIndex);
+        document.getElementById(`card-${currentDeptIndex}`).classList.add("cleared");
+        updateStats();
+
+        resultCard.className = "result-card correct";
+        resultTitle.innerText = `🎉 答對囉！（+${earnedScore}功德）`;
+        resultExplanation.innerHTML = `<b>【典故解析】</b><br>${dept.explanation}`;
+
+        if (clearedDepts.size === gameData.length) {
+          actionBtn.className = "action-btn next-btn";
+          actionBtn.innerText = "🏆 通關結算 ➔";
+          actionBtn.onclick = () => {
+            closeResultOverlay();
+            closeModal();
+            showFinalResult(true);
+          };
+        } else {
+          actionBtn.className = "action-btn next-btn";
+          actionBtn.innerText = "下一關 ➔";
+          actionBtn.onclick = () => {
+            closeResultOverlay();
+            goToNextStage();
+          };
+        }
+
+      } else {
+        playWrongSound();
+        attemptCount++;
+        lives--;
+        updateStats();
+
+        resultCard.className = "result-card wrong";
+        
+        if (lives <= 0) {
+          resultTitle.innerText = "💔 修道生命耗盡！";
+          resultExplanation.innerText = "府城隍爺提醒：心浮氣躁易生妄念，請再接再厲重新修鍊！";
+          actionBtn.className = "action-btn retry-btn";
+          actionBtn.innerText = "💀 觀看遊戲結算";
+          actionBtn.onclick = () => {
+            closeResultOverlay();
+            closeModal();
+            showFinalResult(false);
+          };
+        } else {
+          resultTitle.innerText = `❌ 答錯囉！（扣 1 滴血，剩餘 ${lives} 滴血）`;
+          resultExplanation.innerText = `提示：此題若答對將扣減分數（目前最高可得 ${Math.max(20, 100 - (attemptCount * 20))} 分），請仔細思考後再試！`;
+          actionBtn.className = "action-btn retry-btn";
+          actionBtn.innerText = "🔄 繼續嘗試本題";
+          actionBtn.onclick = () => {
+            closeResultOverlay();
+            renderOptions();
+          };
+        }
+      }
+
+      resultOverlay.classList.add("active");
+    }
+
+    function showFinalResult(isWin) {
+      const finalOverlay = document.getElementById("final-overlay");
+      const finalTitle = document.getElementById("final-title");
+      const finalRank = document.getElementById("final-rank");
+      const finalBody = document.getElementById("final-body");
+
+      let rank = "";
+      if (score === 2400) {
+        rank = "🏆 神級：府城隍爺親傳弟子";
+        triggerGoldShower();
+      } else if (score >= 2000) {
+        rank = "🥇 特優：府城功德大師";
+      } else if (score >= 1500) {
+        rank = "🥈 良善：陰陽界熱心志工";
+      } else {
+        rank = "🥉 新手：初入城隍廟修行者";
+      }
+
+      if (isWin) {
+        finalTitle.innerText = "🎉 圓滿通過二十四司考驗！";
+        finalTitle.style.color = "var(--gold-accent)";
+        finalRank.innerText = rank;
+        finalBody.innerHTML = `
+          最終獲得總功德值：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分！<br>
+          突破關卡：<b>24 / 24</b><br><br>
+          ${score === 2400 ? '<b>完美零失誤！解開隱藏極致稱號！</b>' : '想要挑戰滿分 2400 分拿到完美稱號嗎？歡迎再次重新挑戰！'}
+        `;
+      } else {
+        finalTitle.innerText = "📜 功德尚未圓滿，仍需修鍊";
+        finalTitle.style.color = "#ff6b6b";
+        finalRank.innerText = rank;
+        finalBody.innerHTML = `
+          本次得分：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分<br>
+          已突破關卡：<b>${clearedDepts.size} / 24</b><br><br>
+          修道過程考驗定性，調整心態後再試一次吧！
+        `;
+      }
+
+      finalOverlay.classList.add("active");
+    }
+
+    function confirmRestart() {
+      if (confirm("確定要放棄當前進度重新開始遊戲嗎？")) {
+        initGame();
+      }
+    }
+
+    function resetGame() {
+      document.getElementById("final-overlay").classList.remove("active");
+      initGame();
+    }
+
+    function closeResultOverlay() {
+      document.getElementById("result-overlay").classList.remove("active");
+    }
+
+    function goToNextStage() {
+      let nextIndex = (currentDeptIndex + 1) % gameData.length;
+      for (let i = 0; i < gameData.length; i++) {
+        let checkIdx = (currentDeptIndex + 1 + i) % gameData.length;
+        if (!clearedDepts.has(checkIdx)) {
+          nextIndex = checkIdx;
+          break;
+        }
+      }
+      openModal(nextIndex);
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("active");
+    }
+
+    function getAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+
+    function playCorrectSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } catch (e) {}
+    }
+
+    function playWrongSound() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(160, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now + 0.2);
+        gain.gain.setValueAtTime(0.4, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.2);
+      } catch (e) {}
+    }
+
+    function triggerGoldShower() {
+      var duration = 4 * 1000;
+      var end = Date.now() + duration;
+      (function frame() {
+        confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#d4af37', '#ffd700', '#8b0000'] });
+        confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#d4af37', '#ffd700', '#8b0000'] });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
+
+    window.onload = initGame;
+  </script>
+</body>
+</html>
