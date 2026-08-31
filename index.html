@@ -378,10 +378,10 @@
       border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
-    /* 放大增強版的護身符視覺樣式 */
+    /* 古風平安符視覺卡片 */
     .amulet-card-large {
       margin: 20px auto;
-      padding: 20px 15px;
+      padding: 22px 18px;
       background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
       border: 3px double var(--gold-accent);
       border-radius: 12px;
@@ -390,30 +390,36 @@
       max-width: 380px;
     }
 
-    .amulet-icon-large {
-      font-size: 3.5rem;
-      line-height: 1;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+    .amulet-header-text {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--gold-accent);
+      letter-spacing: 4px;
+      margin-bottom: 6px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
     }
 
     .amulet-title-large {
-      font-size: 1.35rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      color: var(--gold-accent);
-      letter-spacing: 1.5px;
-      margin-bottom: 6px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+      color: #ffffff;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+      border-top: 1px dashed rgba(212, 175, 55, 0.5);
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.5);
+      padding: 6px 0;
     }
 
     .amulet-desc-large {
       font-size: 1rem;
       color: #fff8f0;
       background: rgba(0, 0, 0, 0.4);
-      padding: 8px 12px;
+      padding: 10px 12px;
       border-radius: 6px;
       border-left: 3px solid var(--gold-accent);
       text-align: center;
+      line-height: 1.5;
     }
 
     .page-footer {
@@ -592,7 +598,7 @@
       {
         id: "註福司", name: "註福司", desc: "掌管賜予福氣與累積善果之登記",
         dialogue: "「積善之家，必有餘慶。凡行善積德之人，吾註福司會在福壽簿上為你添上幾分福報！」",
-        question: "想要獲得註福司賜予福報，根據城隍信仰，最根本的途徑是什麼？",
+        question: "想要獲得註福司賜予福報，根據府城隍信仰，最根本的途徑是什麼？",
         options: [
           "花費巨資購買名貴開光法器",
           "多做善事累積陰德心存慈悲",
@@ -605,7 +611,7 @@
       {
         id: "儀禮司", name: "儀禮司", desc: "掌管禮樂儀軌、祭祀規範與尊卑秩序",
         dialogue: "「國有國法，廟有廟禮。儀禮司掌祭祀禮節，世人拜神祈福亦當尊敬誠懇，不可輕慢！」",
-        question: "前往城隍廟參拜時，遵循「儀禮司」規範，下列何者是正確的參拜態度？",
+        question: "前往府城隍廟參拜時，遵循「儀禮司」規範，下列何者是正確的參拜態度？",
         options: [
           "大聲喧嘩並於廟內拋棄垃圾",
           "隨意觸摸神像與桌上法器物品",
@@ -652,7 +658,7 @@
           "代表府城隍爺邀請信眾常來參拜"
         ],
         answerText: "警示世人終將面臨生前善惡大審判",
-        explanation: "臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到城隍面前接受陰司審判。"
+        explanation: "臺灣府城隍廟著名的「爾來了」匾額（臺灣三大名匾之一），警示世人終有一天會來到府城隍面前接受陰司審判。"
       },
       {
         id: "驅疫司", name: "驅疫司", desc: "掌管驅除瘟疫、消災除病",
@@ -665,7 +671,7 @@
           "向附近河川拋擲米穀與各類供品"
         ],
         answerText: "建醮祈安並遶境出巡驅除邪祟瘟神",
-        explanation: "當發生疫病時，常透過建醮或城隍出巡遶境，請驅疫司清掃地方不正之氣。"
+        explanation: "當發生疫病時，常透過建醮或府城隍出巡遶境，請驅疫司清掃地方不正之氣。"
       },
       {
         id: "掌案司", name: "掌案司", desc: "掌管管理各項陰司訴訟案卷公文",
@@ -695,11 +701,11 @@
       },
       {
         id: "良愿司", name: "良愿司", desc: "掌管登記與協助實現善願良好誓願",
-        dialogue: "「凡發宏願救人、發善願利他者，良愿司必呈報城隍，助其善願圓滿實現！」",
+        dialogue: "「凡發宏願救人、發善願利他者，良愿司必呈報府城隍，助其善願圓滿實現！」",
         question: "許願時若想得到良愿司的護持，許下的願望性質應該為何？",
         options: [
           "祈求自己中彩券大獎後獨自享用",
-          "祈求詛咒競爭對手遭遇不測災禍",
+          "祈求詛詛競爭對手遭遇不測災禍",
           "發願行善濟世孝順父母利他善願",
           "祈求無須付出努力即可獲得成功"
         ],
@@ -709,7 +715,7 @@
       {
         id: "功曹司", name: "功曹司", desc: "掌管記錄功德時間與記錄值日文書傳遞",
         dialogue: "「吾乃功曹司，專司記錄每時每刻世人的功德與善行，並負責傳遞陰陽界之飛符公文！」",
-        question: "道教與城隍信仰常有「四值功曹」（值年、值月、值日、值時），功曹司的核心能力是什麼？",
+        question: "道教與府城隍信仰常有「四值功曹」（值年、值月、值日、值時），功曹司的核心能力是什麼？",
         options: [
           "精密記錄時間點與及時傳遞神聖公文",
           "穿越時空回到過去改變歷史既定事實",
@@ -735,7 +741,7 @@
       {
         id: "學政司", name: "學政司", desc: "掌管文風教化、學子功名與文運",
         dialogue: "「十年寒窗無人問，一舉成名天下知。學政司保佑苦讀學子文章寫作與考運亨通，但前提是品德端正！」",
-        question: "古時臺灣府為全臺文化發祥地，學政司與城隍廟中的文昌帝君信仰相呼應，主要庇佑何事？",
+        question: "古時臺灣府為全臺文化發祥地，學政司與府城隍廟中的文昌帝君信仰相呼應，主要庇佑何事？",
         options: [
           "出海捕魚風平浪靜滿載而歸",
           "學業進步科舉功名品德教化",
@@ -795,7 +801,7 @@
           "嚴謹客觀查證確實不枉不縱"
         ],
         answerText: "嚴謹客觀查證確實不枉不縱",
-        explanation: "檢簿司反覆核對簿冊，體現城隍信仰中賞罰分明、查證嚴謹的司法正義。"
+        explanation: "檢簿司反覆核對簿冊，體現府城隍信仰中賞罰分明、查證嚴謹的司法正義。"
       }
     ];
 
@@ -971,36 +977,31 @@
       const finalBody = document.getElementById("final-body");
 
       let rank = "";
-      let icon = "";
       let amuletTitle = "";
       let amuletDesc = "";
 
       if (score === 2400) {
         rank = "神級：你是府城隍爺親傳弟子，二十四司全通！";
-        icon = "🧧";
-        amuletTitle = "【親傳金印御守】";
-        amuletDesc = "「功德無量，道氣長存。城隍親傳，萬邪不侵！」";
+        amuletTitle = "【親傳金印靈符】";
+        amuletDesc = "「功德無量，道氣長存。府城隍親傳，萬邪不侵！」";
         triggerGoldShower();
       } else if (score >= 2000) {
         rank = "特優：你是智慧大師，威靈公賜福智慧福氣！";
-        icon = "📿";
         amuletTitle = "【功德顯赫符】";
         amuletDesc = "「心明如鏡，算盡陰陽。威靈公賜，智慧大開。」";
       } else if (score >= 1500) {
         rank = "良善：你是陰陽界熱心志工，行善積德福報隨身！";
-        icon = "🔰";
         amuletTitle = "【積善賜福符】";
         amuletDesc = "「行善積德，心好命好。二十四司，護佑周全。」";
       } else {
         rank = "新手：你是初入府城隍廟修行者，以後要常來走走啦！";
-        icon = "🏮";
         amuletTitle = "【緣起平安符】";
-        amuletDesc = "「結緣城隍，平安喜樂。常來走走，福氣自來。」";
+        amuletDesc = "「結緣府城隍，平安喜樂。常來走走，福氣自來。」";
       }
 
       const amuletHTML = `
         <div class="amulet-card-large">
-          <div class="amulet-icon-large">${icon}</div>
+          <div class="amulet-header-text">敕令．臺灣府城隍</div>
           <div class="amulet-title-large">${amuletTitle}</div>
           <div class="amulet-desc-large">${amuletDesc}</div>
         </div>
@@ -1015,7 +1016,7 @@
           突破關卡：<b>24 / 24</b><br>
           ${amuletHTML}
           <p style="margin-top:10px; font-size:0.95rem;">
-            ${score === 2400 ? '✨ <b>完美零失誤！解開隱藏極致稱號！</b>' : '想要挑戰滿分 2400 分拿到最高階親傳金印御守嗎？歡迎再次重新挑戰！'}
+            ${score === 2400 ? '✨ <b>完美零失誤！解開隱藏極致稱號！</b>' : '想要挑戰滿分 2400 分拿到最高階親傳金印靈符嗎？歡迎再次重新挑戰！'}
           </p>
         `;
       } else {
