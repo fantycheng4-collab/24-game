@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>臺灣府城隍廟：《二十四司闖關尋寶》</title>
+  <title>臺灣府城隍廟：《二十四司分工闖關》</title>
   
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
@@ -286,7 +286,7 @@
       background-color: #241c18;
       border-radius: 12px;
       width: 85%;
-      max-width: 480px;
+      max-width: 520px;
       padding: 25px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.95);
@@ -362,43 +362,58 @@
       font-size: 1.05rem;
       color: #f5e6d3;
       line-height: 1.8;
-      margin: 20px 0;
+      margin: 15px 0;
       text-align: center;
     }
 
     .rank-badge {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--gold-accent);
       font-weight: bold;
       margin: 10px 0;
-      padding: 8px 12px;
-      background: rgba(0,0,0,0.3);
-      border-radius: 6px;
-      line-height: 1.4;
-    }
-
-    .amulet-box {
-      margin-top: 15px;
-      padding: 12px;
-      background: rgba(212, 175, 55, 0.12);
-      border: 1px solid var(--gold-accent);
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.4);
       border-radius: 8px;
-      text-align: left;
-      font-size: 0.95rem;
+      line-height: 1.4;
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
 
-    .amulet-title {
+    /* 放大增強版的護身符視覺樣式 */
+    .amulet-card-large {
+      margin: 20px auto;
+      padding: 20px 15px;
+      background: linear-gradient(135deg, #8b0000 0%, #4a0000 100%);
+      border: 3px double var(--gold-accent);
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      max-width: 380px;
+    }
+
+    .amulet-icon-large {
+      font-size: 3.5rem;
+      line-height: 1;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
+    }
+
+    .amulet-title-large {
+      font-size: 1.35rem;
       font-weight: bold;
       color: var(--gold-accent);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
     }
 
-    .amulet-desc {
-      color: #e5d8cc;
-      font-size: 0.9rem;
+    .amulet-desc-large {
+      font-size: 1rem;
+      color: #fff8f0;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border-left: 3px solid var(--gold-accent);
+      text-align: center;
     }
 
     .page-footer {
@@ -414,7 +429,7 @@
 <body>
 
   <header>
-    <h1>臺灣府城隍廟：《二十四司闖關尋寶》</h1>
+    <h1>臺灣府城隍廟：《二十四司分工闖關》</h1>
     <p>府城隍爺麾下設二十四司分掌陰陽秩序。小心應答，生命有限，積累最高功德值解開稱號！</p>
 
     <div class="stats-bar">
@@ -956,32 +971,38 @@
       const finalBody = document.getElementById("final-body");
 
       let rank = "";
+      let icon = "";
       let amuletTitle = "";
       let amuletDesc = "";
 
       if (score === 2400) {
-        rank = "🏆 神級：府城隍爺親傳弟子，二十四司全通功德無量！";
-        amuletTitle = "🧧 獲得【親傳金印御守】";
+        rank = "神級：你是府城隍爺親傳弟子，二十四司全通！";
+        icon = "🧧";
+        amuletTitle = "【親傳金印御守】";
         amuletDesc = "「功德無量，道氣長存。城隍親傳，萬邪不侵！」";
         triggerGoldShower();
       } else if (score >= 2000) {
-        rank = "🥇 特優：府城功德大師，威靈公賜福智慧開朗！";
-        amuletTitle = "📿 獲得【功德顯赫符】";
+        rank = "特優：你是智慧大師，威靈公賜福智慧福氣！";
+        icon = "📿";
+        amuletTitle = "【功德顯赫符】";
         amuletDesc = "「心明如鏡，算盡陰陽。威靈公賜，智慧大開。」";
       } else if (score >= 1500) {
-        rank = "🥈 良善：陰陽界熱心志工，行善積德福報隨身！";
-        amuletTitle = "🔰 獲得【積善賜福符】";
+        rank = "良善：你是陰陽界熱心志工，行善積德福報隨身！";
+        icon = "🔰";
+        amuletTitle = "【積善賜福符】";
         amuletDesc = "「行善積德，心好命好。二十四司，護佑周全。」";
       } else {
-        rank = "🥉 新手：初入城隍廟修行者，以後要常來走走喔！";
-        amuletTitle = "🏮 獲得【緣起平安符】";
+        rank = "新手：你是初入府城隍廟修行者，以後要常來走走啦！";
+        icon = "🏮";
+        amuletTitle = "【緣起平安符】";
         amuletDesc = "「結緣城隍，平安喜樂。常來走走，福氣自來。」";
       }
 
       const amuletHTML = `
-        <div class="amulet-box">
-          <div class="amulet-title">${amuletTitle}</div>
-          <div class="amulet-desc">${amuletDesc}</div>
+        <div class="amulet-card-large">
+          <div class="amulet-icon-large">${icon}</div>
+          <div class="amulet-title-large">${amuletTitle}</div>
+          <div class="amulet-desc-large">${amuletDesc}</div>
         </div>
       `;
 
@@ -993,7 +1014,7 @@
           最終獲得總功德值：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分！<br>
           突破關卡：<b>24 / 24</b><br>
           ${amuletHTML}
-          <p style="margin-top:15px; font-size:0.95rem;">
+          <p style="margin-top:10px; font-size:0.95rem;">
             ${score === 2400 ? '✨ <b>完美零失誤！解開隱藏極致稱號！</b>' : '想要挑戰滿分 2400 分拿到最高階親傳金印御守嗎？歡迎再次重新挑戰！'}
           </p>
         `;
@@ -1005,7 +1026,7 @@
           本次得分：<b style="color:var(--gold-accent); font-size:1.4rem;">${score}</b> 分<br>
           已突破關卡：<b>${clearedDepts.size} / 24</b><br>
           ${amuletHTML}
-          <p style="margin-top:15px; font-size:0.95rem;">
+          <p style="margin-top:10px; font-size:0.95rem;">
             修道過程考驗定性，調整心態後再試一次吧！
           </p>
         `;
